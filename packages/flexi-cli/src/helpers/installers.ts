@@ -18,7 +18,7 @@ class Installers {
         console.log(process.cwd() + "\n")
         console.log("Hello now")
         this.spin.start("Installing dependencies...")
-        this.pkgManager.install(this.packageManager)
+        this.pkgManager.install('', false, true)
         this.spin.stop()
     }
     installUno() {
@@ -27,24 +27,24 @@ class Installers {
                 this.pkgManager.remove('tailwindcss @tailwindcss/vite');
             }
         }
-        this.pkgManager.install('unocss@latest @unifydev/preset-ui @unifydev/flexilla', true);
+        this.pkgManager.install('unocss@latest @unifydev/preset-ui @unifydev/flexilla', true, true);
     }
 
     installTailwindCSS() {
         if (!this.pkgManager.isInstalled('tailwindcss')) {
-            this.pkgManager.install('tailwindcss @tailwindcss/vite');
+            this.pkgManager.install('tailwindcss @tailwindcss/vite', true, true);
         } else if (!this.pkgManager.isInstalled('@tailwindcss/vite')) {
-            this.pkgManager.install('@tailwindcss/vite');
+            this.pkgManager.install('@tailwindcss/vite', true, true);
         } else {
             console.log('TailwindCSS is already installed.');
         }
     }
     installIconLibrary(iconLibrary: string, isTailwind: boolean = false) {
         if (isTailwind && !this.pkgManager.isInstalled('@iconify/tailwind4')) {
-            this.pkgManager.install('@iconify/tailwind4', true);
+            this.pkgManager.install('@iconify/tailwind4', true, true);
         }
         try {
-            this.pkgManager.install(`@iconify-json/${iconLibrary}`, true);
+            this.pkgManager.install(`@iconify-json/${iconLibrary}`, true, true);
         } catch (e) {
             console.log('Icon library is already installed.');
         }

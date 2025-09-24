@@ -64,9 +64,9 @@ class PackageManager {
         }
     }
 
-    install(packageName: string, isDevDep: boolean = false): boolean {
+    install(packageName: string, isDevDep: boolean = false, background: boolean = false): boolean {
         this.ensurePackageJson();
-        return this.runCommand(this.buildInstallCommand(packageName, isDevDep), `Installed ${packageName}`, `Failed to install ${packageName}`);
+        return this.runCommand(this.buildInstallCommand(packageName, isDevDep), `Installed ${packageName}`, `Failed to install ${packageName}`, background);
     }
 
     remove(packageName: string): boolean {
