@@ -3,31 +3,35 @@ import { Installers } from "@/helpers/installers";
 import { FileGenerator } from "./file-generator";
 
 class CliSetup {
-    private dir: string;
+    
     constructor(
         dir: string,
         private answers: ProjectAnswers,
         private framework: string,
-        private packageManager: Package_Manager,
+        packageManager: Package_Manager,
         private installer = new Installers(dir, packageManager)
     ) {
-        this.dir = dir;
+
     }
 
-    setup() {
-        this.installDependencies();
+    setup(isNew: boolean = false) {
+        this.installDependencies(isNew);
         this.generateFiles(this.framework);
     }
 
-    private installDependencies() {
-        
-        this.installer.baseInstallation()
-        if (this.answers.cssFramework === "tailwind") {
+    private installDependencies(isNew: boolean) {
+        if (isNew) this.installer.baseInstallation()
+        const isTailwind = this.answers.cssFramework === "tailwind"
+        if (isTailwind) {
             this.installer.installTailwindCSS();
         } else {
             this.installer.installUno();
         }
-        // this.installer.installIconLibrary(this.answers.iconLibrary);
+
+        if (this.answers.framework === "vite" || this.answers.framework === "vite-ts") {
+            this.installer.installViteGlob();
+        }
+        this.installer.installIconLibrary(this.answers.iconLibrary, isTailwind);
     }
 
     private generateFiles(framework: string) {

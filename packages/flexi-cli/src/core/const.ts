@@ -67,8 +67,8 @@ export const DIR_PERMISSIONS = 0o755;
 export const DEFAULT_PATHS = [
     {
         framework:"astro",
-        jsPath:"src/js/",
-        cssPath:"src/css/"
+        jsPath:"src/assets/js/",
+        cssPath:"src/assets/css/"
     },
     {
         framework:"vite-js",

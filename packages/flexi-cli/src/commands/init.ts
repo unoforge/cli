@@ -1,8 +1,8 @@
 import { CliSetup } from "@/core/cli-setup";
 import { ProjectCreator } from "@/core/creator";
+import { PackageManager } from "@/core/package-manager";
 import { ProjectDetector } from "@/core/project-detector";
 import { ProjectInitializer } from "@/core/project-initializer";
-import { ThemingPrompts } from "@/core/theming-prompts";
 import { CloneStarter } from "@/libs/clone-starter";
 import { InitOptions } from "@/types";
 import { checkIsInitialize, displayName, waitForPathExists } from "@/utils";
@@ -51,8 +51,8 @@ export const initCommand = new Command("init")
       return val;
     }
   )
-  .option("--js-path <path>", "Path to the JavaScript/TS entry file, Only For Vite Vanilla and Astro", "src/js/")
-  .option("--css-path <path>", "Path to the CSS file, Only For Vite Vanilla and Astro", "src/css/")
+  .option("--js-path <path>", "Path to the JavaScript/TS entry file, Only For Vite Vanilla and Astro")
+  .option("--css-path <path>", "Path to the CSS file, Only For Vite Vanilla and Astro")
   .option(
     "-c, --cwd <cwd>",
     "the working directory. defaults to the current directory.",
@@ -75,9 +75,12 @@ export const initCommand = new Command("init")
 
       displayName()
 
-      const themePrompt = new ThemingPrompts();
+
 
       const projectInitializer = new ProjectInitializer();
+      const spin = spinner()
+
+
       const {
         projectAnswers,
         initProjectFromCli,
@@ -107,20 +110,20 @@ export const initCommand = new Command("init")
 
         // Wait for the scaffolded project directory to exist before changing directory
         const targetDir = join(process.cwd(), projectAnswers.projectName);
-        const spin = spinner()
-        spin.start(`Waiting for project directory to be created: ${projectAnswers.projectName}`)
-        const ready = await waitForPathExists(targetDir, 60_000, 300, 'package.json');
-        if (!ready) {
-          logger.error(`Timed out waiting for project directory to be created: ${targetDir}`);
-          spin.fail(`Failed to create directory: ${targetDir}`);
-          return process.exit(1);
-        }
+
+        spin.start(`Creating project ${projectAnswers.projectName}, this may take a long time`)
+        // const ready = await waitForPathExists(targetDir, 60_000, 300, 'package.json');
+        // if (!ready) {
+        //   logger.error(`Timed out waiting for project directory to be created: ${targetDir}`);
+        //   spin.fail(`Failed to create directory: ${targetDir}`);
+        //   return process.exit(1);
+        // }
 
 
         try {
           process.chdir(targetDir);
-          cli.setup();
-          spin.succeed(`Project directory created: ${targetDir}`);
+          cli.setup(true);
+          spin.succeed(`Project created successfully`);
           spin.stop()
         } catch (error) {
           logger.error(error);
@@ -132,11 +135,13 @@ export const initCommand = new Command("init")
         return process.exit(0);
       }
 
-      // if (projectAnswers.framework?.startsWith("vite") || projectAnswers.framework?.startsWith("astro")) {
+      const pkgManager = PackageManager.detectPackageManager()
 
-      // }
-      
 
+      const cli = new CliSetup(projectAnswers.projectName, projectAnswers, projectAnswers.framework as any, pkgManager)
+      cli.setup(false)
+      spin.succeed(`Project created successfully`)
+      spin.stop()
     } catch (error) {
       handleError(error);
     }

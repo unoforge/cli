@@ -7,7 +7,10 @@
     "flexi-cli": "./dist/index.cjs"
   },
   "files": [
-    "dist"
+    "dist",
+    "readme.md",
+    "stubs",
+    "package.json"
   ],
   "scripts": {
     "build": "tsup",

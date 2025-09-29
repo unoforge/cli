@@ -1,7 +1,7 @@
 import { ListPackageManager } from "@/types";
 import { existsSync } from "fs";
 import path from "path";
-import { execSync, spawn } from "child_process";
+import { execSync } from "child_process";
 import { spinner } from "@/utils/spinner";
 
 class PackageManager {
@@ -21,7 +21,7 @@ class PackageManager {
         }
     }
 
-    detectPackageManager = (cwd = process.cwd()): ListPackageManager => {
+    static detectPackageManager = (cwd = process.cwd()): ListPackageManager => {
         if (existsSync(path.join(cwd, 'pnpm-lock.yaml'))) return 'pnpm';
         if (existsSync(path.join(cwd, 'yarn.lock'))) return 'yarn';
         if (existsSync(path.join(cwd, 'bun.lockb'))) return 'bun';
@@ -39,22 +39,23 @@ class PackageManager {
         this.workingDir = path.isAbsolute(dir) ? dir : path.resolve(this.workingDir, dir);
     }
 
-    runCommand(command: string, successMessage?: string, failMessage?: string, background: boolean = false): boolean {
+    runCommand(command: string, successMessage?: string, failMessage?: string, background: boolean = false, installMessage?:string): boolean {
+        const installMessage_ = installMessage ? installMessage : `Running command: ${command}`
         try {
             if (background) {
-                this.ui_spinner.start(`Running command: ${command}`);
-                const child = spawn(command, {
-                    cwd: this.workingDir,
-                    shell: true,
-                    detached: true,
-                    stdio: 'ignore',
+                this.ui_spinner.start(installMessage_);
+                execSync(command, { 
+                    cwd: this.workingDir, 
+                    stdio: 'ignore' 
                 });
-                child.unref();
-                this.ui_spinner.succeed(successMessage ?? `Started: ${command}`);
+                this.ui_spinner.succeed(successMessage ?? `Command: ${command}`);
                 return true;
             } else {
-                this.ui_spinner.start(`Running command: ${command}`);
-                execSync(command, { cwd: this.workingDir, stdio: 'inherit' });
+                this.ui_spinner.start(installMessage_);
+                execSync(command, { 
+                    cwd: this.workingDir, 
+                    stdio: 'inherit' 
+                });
                 this.ui_spinner.succeed(successMessage ?? `Command: ${command}`);
                 return true;
             }
@@ -66,7 +67,13 @@ class PackageManager {
 
     install(packageName: string, isDevDep: boolean = false, background: boolean = false): boolean {
         this.ensurePackageJson();
-        return this.runCommand(this.buildInstallCommand(packageName, isDevDep), `Installed ${packageName}`, `Failed to install ${packageName}`, background);
+        return this.runCommand(
+            this.buildInstallCommand(packageName, isDevDep), 
+            `Installed ${packageName}`, 
+            `Failed to install ${packageName}`, 
+            background,
+            `Installing ${packageName}...`
+        );
     }
 
     remove(packageName: string): boolean {

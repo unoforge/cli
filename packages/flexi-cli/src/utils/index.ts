@@ -1,6 +1,7 @@
 import { DEFAULT_PATHS } from "@/core/const";
 import { existsSync, readFileSync } from "fs";
 import { join } from "path";
+import {z} from "zod";
 
 export function getDefaultPaths(framework: string) {
     return DEFAULT_PATHS.find((path) => path.framework === framework) || {
@@ -58,4 +59,30 @@ const checkIsInitialize = (): boolean => {
 }
 
 
-export { waitForPathExists, displayName, checkIsInitialize }
+const normalizeFolderPath = (input: string): string => {
+    if (!input) return input;
+    // Replace backslashes, trim spaces
+    let v = String(input).trim().replace(/\\/g, "/");
+    // Remove leading ./
+    v = v.replace(/^\.\//, "");
+    // Collapse duplicate slashes
+    v = v.replace(/\/+/, "/");
+    // Ensure trailing slash
+    if (!v.endsWith("/")) v += "/";
+    return v;
+}
+
+const validateFolderPathZod = (value: string): true | string => {
+    const isAbsolute = (v: string) => v.startsWith("/") || /^[A-Za-z]:[\\/]/.test(v);
+    const schema = z.string()
+        .min(1, "Path is required")
+        .refine((v) => !isAbsolute(v), "Please provide a relative path (do not start with a drive letter or '/')")
+        .refine((v) => !v.includes("../"), "Path cannot contain '..'")
+        .regex(/^[A-Za-z0-9_\-\.\/]+$/, "Path contains invalid characters");
+
+    const result = schema.safeParse(String(value ?? "").trim());
+    return result.success ? true : result.error.issues[0]?.message || "Invalid path";
+}
+
+
+export { waitForPathExists, displayName, checkIsInitialize, normalizeFolderPath, validateFolderPathZod }

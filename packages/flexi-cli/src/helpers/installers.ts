@@ -1,4 +1,3 @@
-import { ICON_LIBRARIES } from "@/core/const";
 import { PackageManager } from "@/core/package-manager";
 import { Package_Manager } from "@/types";
 import { spinner } from "@/utils/spinner";
@@ -7,19 +6,21 @@ class Installers {
     constructor(
         private dir: string,
         private packageManager: Package_Manager, private pkgManager = new PackageManager(packageManager), private spin = spinner()) {
-
     }
     baseInstallation() {
-        console.log(this.dir + "\n")
-        console.log(process.cwd() + "\n")
-        console.log("Hello")
         this.pkgManager.changeDirectory(this.dir)
-
-        console.log(process.cwd() + "\n")
-        console.log("Hello now")
-        this.spin.start("Installing dependencies...")
-        this.pkgManager.install('', false, true)
-        this.spin.stop()
+        const cmd = `${this.packageManager} install`
+        try {
+            this.spin.start("Installing dependencies...")
+            this.pkgManager.runCommand(cmd, "Installed dependencies", "Installation failed", true)
+            this.spin.stop()
+        } catch (error) {
+            this.spin.fail(`Failed to install dependencies, please run manually : ${cmd}`)
+            process.exit(1)
+        }
+    }
+    installViteGlob() {
+        this.pkgManager.install("glob",false,true)
     }
     installUno() {
         if (!this.pkgManager.isInstalled('unocss')) {
@@ -32,16 +33,16 @@ class Installers {
 
     installTailwindCSS() {
         if (!this.pkgManager.isInstalled('tailwindcss')) {
-            this.pkgManager.install('tailwindcss @tailwindcss/vite', true, true);
+            this.pkgManager.install('tailwindcss @tailwindcss/vite', true);
         } else if (!this.pkgManager.isInstalled('@tailwindcss/vite')) {
-            this.pkgManager.install('@tailwindcss/vite', true, true);
+            this.pkgManager.install('@tailwindcss/vite', true);
         } else {
             console.log('TailwindCSS is already installed.');
         }
     }
     installIconLibrary(iconLibrary: string, isTailwind: boolean = false) {
         if (isTailwind && !this.pkgManager.isInstalled('@iconify/tailwind4')) {
-            this.pkgManager.install('@iconify/tailwind4', true, true);
+            this.pkgManager.install('@iconify/tailwind4', true);
         }
         try {
             this.pkgManager.install(`@iconify-json/${iconLibrary}`, true, true);

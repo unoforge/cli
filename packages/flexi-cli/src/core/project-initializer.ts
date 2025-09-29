@@ -3,7 +3,7 @@ import { ProjectDetector } from "./project-detector";
 import { logger } from "@/utils/logger";
 import prompts from "prompts";
 import { Starters } from "@/libs/starters";
-import { ThemingPrompts } from "./theming-prompts";
+import { ThemingPrompts } from "../helpers/theming-prompts";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 
@@ -103,8 +103,9 @@ export class ProjectInitializer {
             const detectedFramework = ProjectDetector.detect();
 
             if (!this.supportedFrameworks.includes(detectedFramework)) {
+                
                 logger.error(`❌ Sorry, the CLI does not support the '${detectedFramework}' framework for the moment.`);
-                logger.info('Supported frameworks: Astro, Vue, Nuxt, Svelte, Vite (JS/TS)');
+                logger.info('Supported frameworks: Astro, Vue, Svelte, Vite (JS/TS)');
                 process.exit(0);
             }
 
@@ -127,7 +128,6 @@ export class ProjectInitializer {
 
             const name = String(res.projectName || '').trim();
             if (!name) {
-                // validate will handle, but just in case
                 continue;
             }
 
@@ -172,10 +172,11 @@ export class ProjectInitializer {
             cssPath = options.cssPath
         }
         if (jsPath === '' || cssPath === '') {
-            const paths = await this.themingPrompts.askFolders();
+            const paths = await this.themingPrompts.askFolders(framework);
             jsPath = paths.jsPath
             cssPath = paths.cssPath
         }
+        console.log("Hello Folder", jsPath, cssPath)
         return {
             framework,
             projectName: projectNameResponse.projectName,
@@ -231,7 +232,7 @@ export class ProjectInitializer {
             cssPath = options.cssPath
         }
         if (jsPath === '' || cssPath === '') {
-            const paths = await this.themingPrompts.askFolders();
+            const paths = await this.themingPrompts.askFolders(framework);
             jsPath = paths.jsPath
             cssPath = paths.cssPath
         }
