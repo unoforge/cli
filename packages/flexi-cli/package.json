@@ -1,6 +1,6 @@
 {
   "name": "flexi-cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A CLI tool for rapidly scaffolding Web applications using Flexiwind or UnoUI",
   "type": "module",
   "bin": {
