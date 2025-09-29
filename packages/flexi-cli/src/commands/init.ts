@@ -92,11 +92,12 @@ export const initCommand = new Command("init")
       }
 
       if (projectAnswers?.useStarter && projectAnswers.starter) {
-        const cloneStarter = new CloneStarter();
-        await cloneStarter.clone(
-          projectAnswers.starter,
-          projectAnswers.projectName
-        );
+        // const cloneStarter = new CloneStarter();
+        // await cloneStarter.clone(
+        //   projectAnswers.starter,
+        //   projectAnswers.projectName
+        // );
+        logger.info("No starter templates are available yet. Please try again later.");
         return process.exit(0);
       }
 
