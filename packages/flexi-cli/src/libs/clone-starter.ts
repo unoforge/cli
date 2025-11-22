@@ -17,7 +17,7 @@ class CloneStarter {
             }
 
             const spin = spinner();
-            spin.start("Cloning ${starter.title}...");
+            spin.start(`Cloning ${starter.title}...`);
             // Clone the repository
             execSync(`git clone ${starter.github} "${targetPath}"`, {
                 stdio: 'inherit'

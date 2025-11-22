@@ -33,19 +33,17 @@ export class FileGenerator {
         if (!existsSync(cssFolder)) {
             mkdirSync(cssFolder, { recursive: true, mode: DIR_PERMISSIONS });
         }
+        if (!existsSync(`${cssFolder}/flexiwind`)) {
+            mkdirSync(`${cssFolder}/flexiwind`, { recursive: true, mode: DIR_PERMISSIONS });
+        }
 
-        if (answers.framework.includes("vite") || answers.framework === "astro")
-            if (answers.framework === "vite") {
-                writeFileSync(
-                    join(jsFolder, 'flexilla.js'),
-                    StubStorage.get('js.flexilla')
-                );
-            } else {
-                writeFileSync(
-                    join(jsFolder, 'flexilla.ts'),
-                    StubStorage.get('js.flexilla')
-                );
-            }
+        if (answers.framework.includes("vite") || answers.framework === "astro") {
+            const extJs = answers.framework.endsWith("ts") ? "ts" : "js";
+            writeFileSync(
+                join(jsFolder, `flexilla.${extJs}`),
+                StubStorage.get('js.flexilla')
+            );
+        }
     }
 
     private static createFlexiwindFiles(answers: ProjectAnswers, mainCssFileName: string): void {
@@ -65,10 +63,25 @@ export class FileGenerator {
         );
 
         writeFileSync(
-            join(cssFolder, 'flexiwind.css'),
-            StubStorage.get('css.flexiwind')
+            join(cssFolder, 'flexiwind/base.css'),
+            StubStorage.get('css.flexiwind.base')
         );
-
+        writeFileSync(
+            join(cssFolder, 'flexiwind/form.css'),
+            StubStorage.get('css.flexiwind.form')
+        );
+        writeFileSync(
+            join(cssFolder, 'flexiwind/button.css'),
+            StubStorage.get('css.flexiwind.button')
+        );
+        writeFileSync(
+            join(cssFolder, 'flexiwind/ui.css'),
+            StubStorage.get('css.flexiwind.ui')
+        );
+        writeFileSync(
+            join(cssFolder, 'flexiwind/utils.css'),
+            StubStorage.get('css.flexiwind.utils')
+        );
         writeFileSync(
             join(cssFolder, 'button-styles.css'),
             StubStorage.get(`css.${themingFolder}buttons`)

@@ -141,7 +141,7 @@ export const initCommand = new Command("init")
 
       const cli = new CliSetup(projectAnswers.projectName, projectAnswers, projectAnswers.framework as any, pkgManager)
       cli.setup(false)
-      spin.succeed(`Project created successfully`)
+      spin.succeed(`Project initialized successfully`)
       spin.stop()
     } catch (error) {
       handleError(error);
