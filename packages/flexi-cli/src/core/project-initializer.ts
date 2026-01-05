@@ -1,16 +1,14 @@
-import { InitOptions, ProjectAnswers, Starter } from "@/types";
+import { InitOptions, ProjectAnswers } from "@/types";
 import { ProjectDetector } from "./project-detector";
 import { logger } from "@/utils/logger";
 import prompts from "prompts";
-import { Starters } from "@/libs/starters";
 import { ThemingPrompts } from "../helpers/theming-prompts";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
+
 
 
 
 export class ProjectInitializer {
-    private supportedFrameworks = ['astro', 'vue', 'nuxt', 'svelte', 'vite-js', 'vite-ts'];
+    private supportedFrameworks = ['astro', 'vue', 'nuxt', 'svelte', 'vite-js', 'vite-ts', 'rasengan', 'react'];
 
     constructor(
         private themingPrompts: ThemingPrompts = new ThemingPrompts()
@@ -31,9 +29,8 @@ export class ProjectInitializer {
         let initProjectFromCli = false;
         let isNewProject = false;
 
-        if (options.new) {
-            const newProject = await this.createNewProject(options.new, options);
-            return { projectAnswers: newProject, initProjectFromCli: true, isNewProject: true };
+        if (options.cwd && options.cwd !== process.cwd()) {
+            process.chdir(options.cwd);
         }
 
 
@@ -48,62 +45,15 @@ export class ProjectInitializer {
         // Check if package.json exists
         if (!ProjectDetector.hasPackageJson(process.cwd())) {
             logger.error('✘ No package.json found.');
-
-            const starterResponse = await prompts({
-                type: 'confirm',
-                name: 'useStarter',
-                message: 'Would you like to use a starter template?',
-                initial: true
-            });
-
-            if (starterResponse.useStarter) {
-                const projectNameResponse = await this.promptProjectName();
-                const starter = (await new Starters().promptForStarter()) as Starter;
-                projectAnswers = {
-                    framework: starter.framework,
-                    cssFramework: starter.cssFramework,
-                    projectName: projectNameResponse.projectName,
-                    useStarter: true,
-                    theme: "default",
-                    starter,
-                    jsPath: starter.jsPath,
-                    cssPath: starter.cssPath,
-                    themingMode: "both",
-                    iconLibrary: "ph"
-                }
-                initProjectFromCli = true
-            } else {
-                const response = await prompts({
-                    type: 'select',
-                    name: 'framework',
-                    message: 'What framework would you like to use?',
-                    choices: [
-                        { title: 'Astro', value: 'astro' },
-                        { title: 'Vue.js', value: 'vue' },
-                        { title: 'Vue.js (TS)', value: 'vue-ts' },
-                        { title: 'Svelte', value: 'svelte' }, 
-                        { title: 'Svelte (TS)', value: 'svelte-ts' },
-                        { title: 'Vite Vanilla', value: 'vite-js', selected: true },
-                        { title: 'Vite Vanilla (TS)', value: 'vite-ts' }
-                    ]
-                });
-
-                if (!response.framework) {
-                    process.exit(0);
-                }
-
-                projectAnswers = await this.createNewProject(response.framework, options);
-                initProjectFromCli = true;
-                isNewProject = true;
-            }
-
-
+            logger.info('Please create a project first using your framework\'s CLI.');
+            logger.info('Example: npm create astro@latest or npm create vite@latest');
+            process.exit(0);
         } else {
             // Handle existing projects
             const detectedFramework = ProjectDetector.detect();
 
             if (!this.supportedFrameworks.includes(detectedFramework)) {
-                
+
                 logger.error(`❌ Sorry, the CLI does not support the '${detectedFramework}' framework for the moment.`);
                 logger.info('Supported frameworks: Astro, Vue, Svelte, Vite (JS/TS)');
                 process.exit(0);
@@ -117,79 +67,7 @@ export class ProjectInitializer {
 
 
 
-    private async promptProjectName() {
-        while (true) {
-            const res = await prompts({
-                type: 'text',
-                name: 'projectName',
-                message: 'What is your project name?',
-                validate: (value: string) => value.length > 0 || 'Project name is required'
-            });
 
-            const name = String(res.projectName || '').trim();
-            if (!name) {
-                continue;
-            }
-
-            const targetPath = join(process.cwd(), name);
-            if (existsSync(targetPath)) {
-                logger.error(`❌ Directory '${name}' already exists. Please choose a different project name.`);
-                continue;
-            }
-
-            return { projectName: name };
-        }
-    }
-
-    private async createNewProject(framework: string, options: InitOptions): Promise<ProjectAnswers> {
-        const projectNameResponse = await this.promptProjectName();
-
-        const additionalQuestions = [];
-
-        // Only ask for CSS framework if not provided via --styles
-        if (!options.styles || !['unocss', 'tailwind'].includes(options.styles)) {
-            additionalQuestions.push({
-                type: 'select',
-                name: 'cssFramework',
-                message: 'Which CSS framework would you like to use?',
-                choices: [
-                    { title: 'UnoCSS', value: 'unocss' },
-                    { title: 'Tailwind CSS', value: 'tailwind' }
-                ]
-            });
-        }
-
-        additionalQuestions.push(...this.themingPrompts.get());
-
-        const additionalResponses = await prompts(additionalQuestions as any);
-
-        let jsPath = ''
-        let cssPath = ''
-        if (options.jsPath) {
-            jsPath = options.jsPath
-        }
-        if (options.cssPath) {
-            cssPath = options.cssPath
-        }
-        if (jsPath === '' || cssPath === '') {
-            const paths = await this.themingPrompts.askFolders(framework);
-            jsPath = paths.jsPath
-            cssPath = paths.cssPath
-        }
-        console.log("Hello Folder", jsPath, cssPath)
-        return {
-            framework,
-            projectName: projectNameResponse.projectName,
-            useStarter: false,
-            cssFramework: options.styles || additionalResponses.cssFramework,
-            theme: additionalResponses.theme,
-            themingMode: additionalResponses.themingMode,
-            iconLibrary: additionalResponses.iconLibrary,
-            ...additionalResponses,
-            jsPath: jsPath,
-            cssPath: cssPath
-        };
-    }
 
     private async handleExistingProject(framework: string, options: InitOptions): Promise<ProjectAnswers> {
         logger.info(`📦 Detected ${framework} project`);

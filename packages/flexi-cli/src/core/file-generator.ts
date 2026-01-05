@@ -7,6 +7,7 @@ import { CssStyleCompose } from '../helpers/css-style-compose';
 import { UnoUiCompose } from '../helpers/uno-ui-compose';
 import { ProjectAnswers } from '../types';
 import { DIR_PERMISSIONS } from './const';
+import { ProjectDetector } from './project-detector';
 import { logger } from '@/utils/logger';
 
 export class FileGenerator {
@@ -38,7 +39,7 @@ export class FileGenerator {
         }
 
         if (answers.framework.includes("vite") || answers.framework === "astro") {
-            const extJs = answers.framework.endsWith("ts") ? "ts" : "js";
+            const extJs = ProjectDetector.isTypeScript() || answers.framework === "astro" ? "ts" : "js";
             writeFileSync(
                 join(jsFolder, `flexilla.${extJs}`),
                 StubStorage.get('js.flexilla')
@@ -101,22 +102,30 @@ export class FileGenerator {
         // Create shared files first
         this.createShared(answers);
 
-        // const postcssConfig = ComposeUnoConfig.getPostCSSConfig(framework);
         const unoConfig = ComposeUnoConfig.get(answers, themingMode);
-        const appStyle = UnoUiCompose.get(themingMode as "both" | "light" | "dark");
+        const baseStyle = themingMode === "both" ? StubStorage.get(`uno.basestyle`) : themingMode === "dark" ? StubStorage.get(`uno.darkbase`) : StubStorage.get(`uno.lightbase`);
+
+        const mainStyle = StubStorage.get('uno.mainstyle')
+
         const themeStyle = UnoUiCompose.getTheme(theme);
 
-        const endWith = answers.framework.endsWith("-ts") || answers.framework === "astro" ? "ts" : "js"
+        const endWith = ProjectDetector.isTypeScript() || answers.framework === "astro" ? "ts" : "js"
         writeFileSync(`uno.config.${endWith}`, unoConfig);
 
         writeFileSync(
-            join(cssFolder, 'theme.css'),
+            join(cssFolder, 'colors.css'),
             themeStyle
         );
 
         writeFileSync(
+            join(cssFolder, 'base.css'),
+            baseStyle
+        );
+
+
+        writeFileSync(
             join(cssFolder, `${mainCssFileName}.css`),
-            appStyle
+            mainStyle
         );
     }
 
@@ -141,6 +150,9 @@ export class FileGenerator {
         switch (framework) {
             case 'astro':
                 this.createAstroFiles();
+                break;
+            case 'rasengan':
+                this.createRasenganFiles();
                 break;
             case 'vue':
             case 'vue-ts':
@@ -185,6 +197,30 @@ export class FileGenerator {
         );
     }
 
+    private static createRasenganFiles(): void {
+        if (!existsSync("src/components")) {
+            mkdirSync("src/components", { recursive: true, mode: DIR_PERMISSIONS });
+        }
+
+
+
+        // writeFileSync(
+        //     'tsconfig.json',
+        //     StubStorage.get("astro.tsconfig")
+        // );
+        // writeFileSync(
+        //     'src/layouts/Layout.astro',
+        //     StubStorage.get("astro.layout")
+        // );
+
+        // writeFileSync(
+        //     'src/components/seo/SEO.astro',
+        //     StubStorage.get("astro.seo")
+        // );
+
+        writeFileSync(`rasengan.config.js`, StubStorage.get('rasengan.config'));
+    }
+
     private static createVueFiles(answers: ProjectAnswers): void {
         logger.break()
         logger.info("🌟  Vue support is still under construction. Contributions are welcome! 🚀");
@@ -200,7 +236,7 @@ export class FileGenerator {
     }
 
     private static createViteFiles(answers: ProjectAnswers): void {
-        const endWith = answers.framework.endsWith("-ts") ? "ts" : "js"
+        const endWith = ProjectDetector.isTypeScript() ? "ts" : "js"
         writeFileSync(`vite.config.${endWith}`, StubStorage.get('vite.vanilla'));
     }
 }

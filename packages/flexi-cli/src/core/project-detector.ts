@@ -1,9 +1,17 @@
 import { type Package_Manager } from "@/types";
 import { existsSync, readFileSync } from "fs";
 import { join } from "path";
-
 import prompts from "prompts";
+
+interface PackageJson {
+    dependencies?: Record<string, string>;
+    devDependencies?: Record<string, string>;
+    [key: string]: any;
+}
+
 export class ProjectDetector {
+    private static packageJsonCache: Map<string, PackageJson | null> = new Map();
+
     static async askPackageManager(): Promise<Package_Manager> {
         const response = await prompts([
             {
@@ -17,70 +25,56 @@ export class ProjectDetector {
                     { title: 'bun', value: 'bun' }
                 ]
             }
-        ])
-        return response.packageManager as Package_Manager
+        ]);
+        return response.packageManager as Package_Manager;
     }
 
     static checkComposer(path: string): boolean {
         return existsSync(join(path, 'composer.json'));
     }
+
     static detect(): string {
         const path = process.cwd();
 
-        // Laravel
-        if (existsSync(join(path, 'artisan'))) {
-            return 'laravel';
+        const markers: Record<string, string> = {
+            'artisan': 'laravel',
+            'bin/console': 'symfony',
+            'manage.py': 'django'
+        };
+
+        for (const [marker, framework] of Object.entries(markers)) {
+            if (existsSync(join(path, marker))) {
+                return framework;
+            }
         }
 
-        // Symfony
-        if (existsSync(join(path, 'bin/console'))) {
-            return 'symfony';
-        }
-
-        // Django
-        if (existsSync(join(path, 'manage.py'))) {
-            return 'django';
-        }
-
-        // Check package.json for JS frameworks
         if (this.hasPackageJson(path)) {
             const packageJson = this.getPackageJson(path);
             if (packageJson) {
-                const dependencies = { ...packageJson.dependencies, ...packageJson.devDependencies };
+                const dependencies = {
+                    ...packageJson.dependencies,
+                    ...packageJson.devDependencies
+                };
 
-                // Astro
-                if ('astro' in dependencies) {
-                    return 'astro';
+                const frameworkDetectors: Record<string, string | string[]> = {
+                    'astro': 'astro',
+                    'rasengan': 'rasengan',
+                    'nuxt': 'nuxt',
+                    'vue': 'vue',
+                    'react': 'react',
+                    'svelte': ['svelte', '@sveltejs/kit']
+                };
+
+                for (const [framework, keys] of Object.entries(frameworkDetectors)) {
+                    const keysToCheck = Array.isArray(keys) ? keys : [keys];
+                    if (keysToCheck.some(key => key in dependencies)) {
+                        if (framework === 'vue' && 'nuxt' in dependencies) continue;
+                        return framework;
+                    }
                 }
 
-                // Nuxt
-                if ('nuxt' in dependencies) {
-                    return 'nuxt';
-                }
-
-                // Vue
-                if ('vue' in dependencies && !('nuxt' in dependencies)) {
-                    return 'vue';
-                }
-
-                // React
-                if ('react' in dependencies) {
-                    return 'react';
-                }
-
-                // Svelte
-                if ('svelte' in dependencies || '@sveltejs/kit' in dependencies) {
-                    return 'svelte';
-                }
-
-                // Vite with TypeScript
-                if ('vite' in dependencies && 'typescript' in dependencies) {
-                    return 'vite-ts';
-                }
-
-                // Vite vanilla JS
                 if ('vite' in dependencies) {
-                    return 'vite-js';
+                    return 'typescript' in dependencies ? 'vite-ts' : 'vite-js';
                 }
             }
         }
@@ -92,60 +86,63 @@ export class ProjectDetector {
         return existsSync(join(path, 'package.json'));
     }
 
-    static getPackageJson(path: string): any | null {
+    static getPackageJson(path: string): PackageJson | null {
+        if (this.packageJsonCache.has(path)) {
+            return this.packageJsonCache.get(path)!;
+        }
+
         const packageJsonPath = join(path, 'package.json');
         if (!existsSync(packageJsonPath)) {
+            this.packageJsonCache.set(path, null);
             return null;
         }
 
         try {
             const content = readFileSync(packageJsonPath, 'utf-8');
-            return JSON.parse(content);
+            const parsed = JSON.parse(content);
+            this.packageJsonCache.set(path, parsed);
+            return parsed;
         } catch (error) {
+            this.packageJsonCache.set(path, null);
             return null;
         }
     }
 
-    static checkTailwindCSS(): boolean {
+    static checkCSSFramework(framework: 'tailwindcss' | 'unocss'): boolean {
         const path = process.cwd();
         const packageJson = this.getPackageJson(path);
 
-        if (!packageJson) {
-            return false;
+        if (packageJson) {
+            const dependencies = {
+                ...packageJson.dependencies,
+                ...packageJson.devDependencies
+            };
+
+            if (framework === 'tailwindcss' && 'tailwindcss' in dependencies) return true;
+            if (framework === 'unocss' && 'unocss' in dependencies) return true;
         }
 
-        const dependencies = {
-            ...packageJson.dependencies,
-            ...packageJson.devDependencies
-        };
+        if (framework === 'unocss') {
+            const configFiles = ['uno.config.js', 'uno.config.ts'];
+            return configFiles.some(file => existsSync(join(path, file)));
+        }
 
-        return 'tailwindcss' in dependencies;
+        return false;
+    }
+
+    // Deprecated in favor of generic checkCSSFramework, but kept for compatibility if needed
+    // Actually, let's keep them and make them call the generic one to not break other files.
+    static checkTailwindCSS(): boolean {
+        return this.checkCSSFramework('tailwindcss');
     }
 
     static checkUnoCSS(): boolean {
+        return this.checkCSSFramework('unocss');
+    }
+
+    static isTypeScript(): boolean {
         const path = process.cwd();
-        const packageJson = this.getPackageJson(path);
-
-        if (!packageJson) {
-            return false;
-        }
-
-        const dependencies = {
-            ...packageJson.dependencies,
-            ...packageJson.devDependencies
-        };
-
-        if ('unocss' in dependencies) {
-            return true;
-        }
-
-        // Check for UnoCSS config files
-        const configFiles = [
-            'uno.config.js',
-            'uno.config.ts'
-        ];
-
-        return configFiles.some(file => existsSync(join(path, file)));
+        return existsSync(join(path, 'tsconfig.json'));
     }
 }
 

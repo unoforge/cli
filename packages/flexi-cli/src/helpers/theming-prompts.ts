@@ -40,19 +40,21 @@ class ThemingPrompts {
         ];
     }
     async askFolders(framework: string) {
-        const paths = DEFAULT_PATHS.find(path=>path.framework===framework) ?? {
-            cssPath:"src/css",
-            jsPath:"src/js"
+        const paths = DEFAULT_PATHS.find(path => path.framework === framework) ?? {
+            cssPath: "src/css",
+            jsPath: "src/js"
         }
+        const skipJsPath = ['react', 'vue', 'nuxt', 'rasengan'].includes(framework);
+
         const response = await prompts([
-            {
+            ...(!skipJsPath ? [{
                 type: 'text',
                 name: 'jsPath',
                 message: 'Path to the JavaScript/TS entry file',
                 initial: paths.jsPath,
                 validate: (val: string) => validateFolderPathZod(val),
                 format: (val: string) => normalizeFolderPath(val)
-            } as prompts.PromptObject,
+            } as prompts.PromptObject] : []),
             {
                 type: 'text',
                 name: 'cssPath',
@@ -62,7 +64,10 @@ class ThemingPrompts {
                 format: (val: string) => normalizeFolderPath(val)
             } as prompts.PromptObject,
         ])
-        return response
+        return {
+            jsPath: skipJsPath ? paths.jsPath : response.jsPath,
+            cssPath: response.cssPath
+        }
     }
 }
 

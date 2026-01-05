@@ -1,8 +1,12 @@
 import { readFileSync, existsSync } from "fs";
-import { join } from "path";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export class StubStorage {
-    private static basePath = join(__dirname, '../stubs');
+    private static basePath = join(__dirname, '../../stubs');
 
     static get(key: string): string {
         const path = key.replace(/\./g, '/') + '.stub';

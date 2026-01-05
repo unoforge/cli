@@ -11,6 +11,11 @@ export class ComposeUnoConfig {
                     './src/**/*.astro'
                 ];
                 break;
+            case 'rasengan':
+                paths = [
+                    './src/**/*.{js,ts,jsx,tsx}'
+                ];
+                break;
             case 'vue':
                 paths = [
                     './src/**/*.{vue,js,ts,jsx,tsx}',
@@ -54,8 +59,6 @@ export class ComposeUnoConfig {
 import { flexillaPreset } from "@unifydev/flexilla";
 import { presetUI } from "@unifydev/preset-ui";`;
 
-        const importIcon = `import icons from "@iconify-json/${icon}";`;
-
         const appearance = themingMode === 'dark'
             ? 'appearance: "dark"'
             : (themingMode === 'light'
@@ -67,8 +70,7 @@ import { presetUI } from "@unifydev/preset-ui";`;
         presetWind3({ dark: "class" }),
         presetIcons({
             collections: {
-                // Use the \`icons\` object directly from '@iconify-json/${icon}'
-                ${icon}: icons,
+                ${icon}: () => import('@iconify-json/${icon}/icons.json').then(i => i.default),
             },
         }),
         presetUI({
@@ -78,12 +80,12 @@ import { presetUI } from "@unifydev/preset-ui";`;
     ],
 });`;
 
-        return `${configImport}\n${importIcon}\n\n${config}`;
+        return `${configImport}\n\n\n${config}`;
     }
 
     static getPostCSSConfig(framework: string = 'astro'): string {
         const content = this.getContentConfig(framework);
-        
+
         const postcssConfig = `import UnoCSS from '@unocss/postcss'
 
 export default {
