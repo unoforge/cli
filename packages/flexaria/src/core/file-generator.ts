@@ -10,7 +10,7 @@ import { ProjectDetector } from './project-detector';
 
 export class FileGenerator {
     static generateBaseFiles(framework: string, answers: ProjectAnswers): void {
-        const mainCssFileName = this.getMainCssFileName();
+        const mainCssFileName = this.getMainCssFileName(framework);
 
         this.createFlexiwindFiles(answers, mainCssFileName);
         this.createFrameworkSpecificFiles(framework, answers);
@@ -89,8 +89,8 @@ export class FileGenerator {
             "rsc": truncate,
             "tsx": ProjectDetector.isTypeScript(),
             "tailwind": {
-                "config": "",
-                "css": join(answers.cssPath || (ProjectDetector.hasSrcDir() ? 'src/' : './'), `${this.getMainCssFileName()}.css`),
+                "config": this.getTailwindConfigPath(answers.framework),
+                "css": join(answers.cssPath || (ProjectDetector.hasSrcDir() ? 'src/' : './'), `${this.getMainCssFileName(answers.framework)}.css`),
                 "baseColor": "slate",
                 "cssVariables": true,
                 "prefix": ""
@@ -113,8 +113,23 @@ export class FileGenerator {
         writeFileSync('components.json', JSON.stringify(componentsJson, null, 2));
     }
 
-    private static getMainCssFileName(): string {
-        return "globals"
+    private static getMainCssFileName(framework: string): string {
+        if(framework === 'next' || framework === 'laravel-inertia') {
+            return 'globals'
+        }
+
+        return "app"
+    }
+
+    private static getTailwindConfigPath(framework: string): string {
+        if (framework === 'laravel-inertia') {
+            return 'tailwind.config.js';
+        }
+
+        const isTs = ProjectDetector.isTypeScript();
+        const extension = isTs ? 'ts' : 'js';
+
+        return `tailwind.config.${extension}`;
     }
 
     private static createFrameworkSpecificFiles(framework: string, answers: ProjectAnswers): void {
