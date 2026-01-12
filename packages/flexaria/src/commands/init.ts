@@ -11,18 +11,7 @@ import { Command } from "commander";
 
 export const initCommand = new Command("init")
   .description("Initialize a new project or configure an existing one")
-  .option(
-    "--styles <framework>",
-    "CSS framework to use (tailwind|unocss)",
-    (val) => {
-      if (!["tailwind", "unocss"].includes(val)) {
-        throw new Error("Invalid CSS framework. Use tailwind or unocss.");
-      }
-      return val;
-    }
-  )
 
-  .option("--js-path <path>", "Path to the JavaScript/TS entry file, Only For Vite Vanilla and Astro")
   .option("--css-path <path>", "Path to the CSS file, Only For Vite Vanilla and Astro")
   .option(
     "-c, --cwd <cwd>",
@@ -32,8 +21,6 @@ export const initCommand = new Command("init")
   .action(async (opts) => {
     try {
       const options: InitOptions = {
-        styles: opts.styles,
-        jsPath: opts.jsPath,
         cssPath: opts.cssPath,
         cwd: opts.cwd,
       };
@@ -53,8 +40,6 @@ export const initCommand = new Command("init")
 
       const {
         projectAnswers,
-        initProjectFromCli,
-        isNewProject,
       } = await projectInitializer.initialize(options);
 
       const pkgManager = PackageManager.detectPackageManager()

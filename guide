@@ -1,0 +1,37 @@
+When no project detected: 
+    1. Would do you like to start a new project?
+        - Tanstack Start
+        - Rasengan
+        - Laravel + Inertia
+        - NextJS
+    2. Which package manager would you like to use?
+        - npm
+        - yarn
+        - pnpm
+        - bun (selected by default otherwise npm if installed on the machine)
+
+
+Config 
+
+1. Which Color would you like to use as the base color?
+    - Slate
+    - Zinc
+    - Neutral
+    - Stone
+
+2. Which Icon Library would you like to use?
+    - Phosphore
+    - Heroicons
+    - Lucide
+    - Hugeicons (Default)
+
+3. Would you like to use iconify (in CSS icons) or SVG based icon?
+    - Yes (default)
+    - No
+
+3. Which theming mode would you like to use?
+    - Both
+    - Light
+    - Dark
+
+

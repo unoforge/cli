@@ -1,6 +1,6 @@
 import { type Package_Manager } from "@/types";
 import { existsSync, readFileSync } from "fs";
-import { join } from "path";
+import { basename, join } from "path";
 import prompts from "prompts";
 
 interface PackageJson {
@@ -29,24 +29,10 @@ export class ProjectDetector {
         return response.packageManager as Package_Manager;
     }
 
-    static checkComposer(path: string): boolean {
-        return existsSync(join(path, 'composer.json'));
-    }
+
 
     static detect(): string {
         const path = process.cwd();
-
-        const markers: Record<string, string> = {
-            'artisan': 'laravel',
-            'bin/console': 'symfony',
-            'manage.py': 'django'
-        };
-
-        for (const [marker, framework] of Object.entries(markers)) {
-            if (existsSync(join(path, marker))) {
-                return framework;
-            }
-        }
 
         if (this.hasPackageJson(path)) {
             const packageJson = this.getPackageJson(path);
@@ -59,23 +45,37 @@ export class ProjectDetector {
                 const frameworkDetectors: Record<string, string | string[]> = {
                     'astro': 'astro',
                     'rasengan': 'rasengan',
-                    'nuxt': 'nuxt',
-                    'vue': 'vue',
                     'react': 'react',
-                    'svelte': ['svelte', '@sveltejs/kit']
+                    'tanstack-start': '@tanstack/react-start',
+                    'react-router': '@react-router/node',
+                    'inertia-react': '@inertiajs/react'
                 };
 
                 for (const [framework, keys] of Object.entries(frameworkDetectors)) {
                     const keysToCheck = Array.isArray(keys) ? keys : [keys];
                     if (keysToCheck.some(key => key in dependencies)) {
-                        if (framework === 'vue' && 'nuxt' in dependencies) continue;
                         return framework;
                     }
                 }
 
                 if ('vite' in dependencies) {
+                    if ('@vitejs/plugin-react' in dependencies || '@vitejs/plugin-react-swc' in dependencies) {
+                        return 'react';
+                    }
                     return 'typescript' in dependencies ? 'vite-ts' : 'vite-js';
                 }
+            }
+        }
+
+        const markers: Record<string, string> = {
+            'artisan': 'laravel',
+            'bin/console': 'symfony',
+            'manage.py': 'django'
+        };
+
+        for (const [marker, framework] of Object.entries(markers)) {
+            if (existsSync(join(path, marker))) {
+                return framework;
             }
         }
 
@@ -108,7 +108,7 @@ export class ProjectDetector {
         }
     }
 
-    static checkCSSFramework(framework: 'tailwindcss' | 'unocss'): boolean {
+    static checkCSSFramework(framework: 'tailwindcss'): boolean {
         const path = process.cwd();
         const packageJson = this.getPackageJson(path);
 
@@ -119,12 +119,6 @@ export class ProjectDetector {
             };
 
             if (framework === 'tailwindcss' && 'tailwindcss' in dependencies) return true;
-            if (framework === 'unocss' && 'unocss' in dependencies) return true;
-        }
-
-        if (framework === 'unocss') {
-            const configFiles = ['uno.config.js', 'uno.config.ts'];
-            return configFiles.some(file => existsSync(join(path, file)));
         }
 
         return false;
@@ -136,8 +130,17 @@ export class ProjectDetector {
         return this.checkCSSFramework('tailwindcss');
     }
 
-    static checkUnoCSS(): boolean {
-        return this.checkCSSFramework('unocss');
+    static getProjectName(): string {
+        const path = process.cwd();
+        const packageJson = this.getPackageJson(path);
+        if (packageJson && packageJson.name) {
+            return packageJson.name;
+        }
+        return basename(path);
+    }
+
+    static hasSrcDir(): boolean {
+        return existsSync(join(process.cwd(), 'src'));
     }
 
     static isTypeScript(): boolean {

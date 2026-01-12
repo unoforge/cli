@@ -1,6 +1,9 @@
 import prompts from "prompts";
 import { DEFAULT_PATHS, ICON_LIBRARIES, THEMES, THEMING_MODES } from "../core/const";
 import { normalizeFolderPath, validateFolderPathZod } from "@/utils";
+import { ProjectDetector } from "../core/project-detector";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 
 
 class ThemingPrompts {
@@ -36,25 +39,21 @@ class ThemingPrompts {
                     value: theme.value,
                     selected: theme.selected
                 }))
-            } as prompts.PromptObject
+            } as prompts.PromptObject,
         ];
     }
     async askFolders(framework: string) {
-        const paths = DEFAULT_PATHS.find(path => path.framework === framework) ?? {
-            cssPath: "src/css",
-            jsPath: "src/js"
+        const hasSrc = ProjectDetector.hasSrcDir();
+        const isUsingAppDir = framework === 'next' && existsSync(join(process.cwd(), 'app'));
+        const rawPaths = DEFAULT_PATHS.find(path => path.framework === framework) ?? {
+            cssPath: isUsingAppDir ? "styles" : "src/styles",
         }
-        const skipJsPath = ['react', 'vue', 'nuxt', 'rasengan'].includes(framework);
+
+        const paths = {
+            cssPath: hasSrc ? rawPaths.cssPath : (rawPaths.cssPath?.startsWith('src/') ? rawPaths.cssPath.replace('src/', '') : rawPaths.cssPath),
+        }
 
         const response = await prompts([
-            ...(!skipJsPath ? [{
-                type: 'text',
-                name: 'jsPath',
-                message: 'Path to the JavaScript/TS entry file',
-                initial: paths.jsPath,
-                validate: (val: string) => validateFolderPathZod(val),
-                format: (val: string) => normalizeFolderPath(val)
-            } as prompts.PromptObject] : []),
             {
                 type: 'text',
                 name: 'cssPath',
@@ -65,7 +64,6 @@ class ThemingPrompts {
             } as prompts.PromptObject,
         ])
         return {
-            jsPath: skipJsPath ? paths.jsPath : response.jsPath,
             cssPath: response.cssPath
         }
     }

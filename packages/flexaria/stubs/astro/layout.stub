@@ -1,0 +1,17 @@
+---
+import "@assets/css/app.css";
+import { ViewTransitions } from "astro:transitions";
+
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<ViewTransitions />
+	</head>
+	<body
+		class=""
+	>
+    <slot/>
+	</body>
+</html>
