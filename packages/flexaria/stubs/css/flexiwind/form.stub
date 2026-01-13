@@ -1,8 +1,96 @@
-
-/* input  */
-@utility ui-form-input {
-  @apply disabled:hover:cursor-not-allowed disabled:opacity-80 outline-offset-0 focus:outline-offset-0 focus:border-transparent outline outline-transparent focus:outline-(--ui-input-focus-outline) ring-transparent ring-offset-transparent focus:ring-(--focus-ring) ring-3 ring-offset-1 transition-all ease-linear duration-200;
+@utility ui-form-ring-base {
+  @apply outline outline-transparent ring-transparent ring-offset-transparent ring-3 ring-offset-1;
 }
+
+@utility ui-form-ring {
+  @apply focus:ring-(--focus-ring) focus:outline-(--ui-input-focus-outline);
+}
+
+@utility ui-input-opt-ring {
+  @apply data-[active=true]:ring-(--focus-ring) data-[active=true]:outline-(--ui-input-focus-outline) hover:outline-(--ui-input-focus-outline);
+}
+
+@utility ui-input-opt-ring-danger {
+  @apply data-[active=true]:aria-invalid:ring-(--focus-ring-invalid) data-[active=true]:aria-invalid:outline-(--ui-input-focus-outline-invalid);
+}
+
+
+
+@utility ui-form-input {
+  @apply disabled:hover:cursor-not-allowed disabled:opacity-60 transition-all ease-linear duration-200;
+}
+
+@utility ui-form-outline {
+  @apply outline-offset-0 focus:outline-offset-0 focus:border-transparent;
+}
+
+@utility ui-form-otp-outline {
+  @apply outline-offset-0 data-[active=true]:outline-offset-0 data-[active=true]:border-transparent;
+}
+
+
+@utility ui-form-group-base {
+  @apply w-full data-invalide:outline-(--ui-input-invalid-outline);
+
+  & input,
+  & select {
+    @apply flex-1 placeholder-(--ui-input-place-holder) leading-6;
+  }
+}
+
+@utility ui-form-group {
+  @apply has-disabled:hover:cursor-not-allowed disabled:hover:cursor-not-allowed has-disabled:opacity-80 disabled:opacity-80 outline-offset-0 transition-all ease-linear duration-200;
+
+  & input {
+    @apply outline-none focus:outline-none appearance-none;
+  }
+}
+
+
+@utility ui-form-group-ring {
+  @apply focus-within:outline-offset-0 focus-within:border-transparent focus-within:outline-(--ui-input-focus-outline) focus-within:ring-(--focus-ring);
+}
+
+@utility ui-input-select-trigger-base {
+  @apply relative focus:enabled:hover:border-ring/80 enabled:hover:border-fg-muted/30 flex w-full min-w-0 items-center;
+}
+
+@utility ui-form-select-trigger {
+  @apply relative;
+}
+
+@utility ui-form-select-trigger-invalid {
+  @apply group-open/select:border-ring/70 group-open/select:ring-3 group-open/select:ring-ring/20;
+}
+
+@utility ui-form-select-triger-invalid-base {
+  @apply group-focus/select:group-invalid/select:border-(--select-trigger-danger-border) group-focus/select:group-invalid/select:enabled:hover:border-(--select-trigger-danger-border-hover);
+}
+
+@utility ui-form-select-trigger-invalid-outline {
+  @apply group-open/select:invalid:border-(--select-trigger-danger-border) group-open/select:invalid:ring-3 group-open/select:invalid:ring-(--select-trigger-danger-ring) group-invalid/select:border-(--select-trigger-danger-border) group-invalid/select:ring-(--select-trigger-danger-ring) group-invalid/select:enabled:hover:border-(--select-trigger-danger-border);
+}
+
+@utility ui-form-select-trigger-access {
+  @apply in-disabled:bg-bg-muted in-disabled:opacity-50 forced-colors:in-disabled:border-[GrayText] forced-colors:in-disabled:text-[GrayText];
+}
+
+@utility ui-form-select-trigger-ring {
+  @apply focus:outline-offset-0 focus:border-transparent focus:outline-(--ui-input-focus-outline) focus:ring-(--focus-ring)
+}
+
+/* to complete for select trigger  */
+
+/* "*:data-[slot=icon]:size-5 *:data-[slot=icon]:shrink-0 *:data-[slot=icon]:self-center *:data-[slot=icon]:text-(--btn-icon) pressed:*:data-[slot=icon]:text-(--btn-icon-active) focus-visible:*:data-[slot=icon]:text-(--btn-icon-active)/80 enabled:hover:*:data-[slot=icon]:text-(--btn-icon-active)/90 sm:*:data-[slot=icon]:size-4 forced-colors:[--btn-icon:ButtonText] forced-colors:hover:[--btn-icon:ButtonText]",
+          "*:data-[slot=loader]:size-5 *:data-[slot=loader]:shrink-0 *:data-[slot=loader]:self-center *:data-[slot=loader]:text-(--btn-icon) sm:*:data-[slot=loader]:size-4",
+
+          "forced-colors:group-focus/select:border-[Highlight] forced-colors:group-invalid/select:border-[Mark] forced-colors:group-focus/select:group-invalid/select:border-[Mark]",
+          "group-disabled/select:bg-muted group-disabled/select:opacity-50 forced-colors:group-disabled/select:border-[GrayText] forced-colors:group-disabled/select:text-[GrayText]",
+          "",
+          "dark:scheme-dark", */
+
+
+
 
 @utility ui-form-input-xs {
   @apply px-2 text-xs h-6;
@@ -25,167 +113,77 @@
 }
 
 @utility ui-form-base {
-  @apply appearance-none w-full placeholder-[color:var(--ui-input-place-holder)] invalid:[outline-color:var(--ui-input-invalid-outline)] [line-height:1.5rem];
-}
-
-
-@utility ui-form-select {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="%236b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>');
-  @apply appearance-none w-full placeholder-[color:var(--ui-input-place-holder)] [line-height:1.5rem] [background-position:right_0.5rem_center] [background-repeat:no-repeat] [background-size:1.5em_1.5em] [padding-right:2.5rem] [print-color-adjust:exact];
-}
-
-@utility flexi-form-select {
-  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23000000%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cpath%20d%3D%22M181.66%2C170.34a8%2C8%2C0%2C0%2C1%2C0%2C11.32l-48%2C48a8%2C8%2C0%2C0%2C1-11.32%2C0l-48-48a8%2C8%2C0%2C0%2C1%2C11.32-11.32L128%2C212.69l42.34-42.35A8%2C8%2C0%2C0%2C1%2C181.66%2C170.34Zm-96-84.68L128%2C43.31l42.34%2C42.35a8%2C8%2C0%2C0%2C0%2C11.32-11.32l-48-48a8%2C8%2C0%2C0%2C0-11.32%2C0l-48%2C48A8%2C8%2C0%2C0%2C0%2C85.66%2C85.66Z%22%2F%3E%3C%2Fsvg%3E');
-  @apply appearance-none w-full placeholder-[color:var(--ui-input-place-holder)] [line-height:1.5rem] [background-position:right_0.5rem_center] [background-repeat:no-repeat] [background-size:1.5em_1.5em] [padding-right:2.5rem] [print-color-adjust:exact];
-}
-
-@utility ui-form-multiselect {
-  @apply [background-image:unset] [background-position:unset] [background-repeat:unset] [background-size:unset] [padding-right:0.75rem] [print-color-adjust:unset]
-}
-
-@utility ui-checkbox-radio-base {
-  --u-check-radio-color: var(--check-radio-offset-color, currentColor);
-  @apply appearance-none p-0 [print-color-adjust:exact] inline-block align-middle [background-origin:border-box] [user-select:none] [flex-shrink:0] [--un-shadow:0_0_#0000] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:[outline-color:var(--u-check-radio-color)] focus:ring-0 focus:checked:[background-color:currentColor] checked:hover:[border-color:transparent] [border-color:transparent] [background-color:currentColor] [background-size:100%_100%] [background-position:center] [background-repeat:no-repeat];
+  @apply appearance-none w-full placeholder-(--ui-input-place-holder) data-invalid:outline-(--ui-input-invalid-outline) leading-6;
 }
 
 
 
-@utility ui-form-checkbox {
-  @apply disabled:opacity-50 disabled:cursor-not-allowed outline-0 outline-transparent focus-visible:ring-1 focus-visible:ring-current focus:ring-0 focus:ring-transparent focus:ring-offset-transparent focus-visible:ring-offset-2 focus-visible:ring-offset-(--ui-ring-bg) bg-(--ui-checkbox-bg) border border-(--ui-checkbox-border) checked:bg-current checked:border-transparent indeterminate:bg-current indeterminate:border-transparent indeterminate:[background-size:100%_100%] indeterminate:[background-position:center] indeterminate:[background-repeat:no-repeat];
-
-  &:checked {
-    background-image: url('data:image/svg+xml,<svg viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z"/></svg>')
-  }
-
-  &:indeterminate {
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16"><path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h8"/></svg>');
-  }
+@utility ui_c_r {
+  @apply outline-offset-0 outline outline-transparent fx-checked:outline-offset-0 fx-checked:border-transparent fx-indeterminate:outline-offset-0 fx-indeterminate:border-transparent fx-checked:outline-(--ui-input-focus-outline) fx-indeterminate:outline-(--ui-input-focus-outline);
 }
 
-@utility ui-form-radio {
-  @apply disabled:opacity-50 disabled:cursor-not-allowed outline-0 outline-transparent focus-visible:ring-2 focus-visible:ring-current focus:ring-0 focus:ring-transparent focus:ring-offset-transparent focus-visible:ring-offset-(--ui-ring-bg) focus-visible:ring-offset-2 checked:bg-current checked:border-transparent indeterminate:bg-current indeterminate:border-transparent;
+@utility ui_c_r-selected {
+  @apply bg-(--checkbox-bg) text-(--checkbox-fg) fx-checked:[--checkbox-bg:var(--checkbox-bg-checked)] fx-checked:[--checkbox-fg:var(--checkbox-fg-checked)];
+}
 
-  &:checked {
-    background-image: url('data:image/svg+xml,<svg viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="3"/></svg>');
+@utility ui-c_r-ring {
+  @apply ring-transparent ring-offset-transparent fx-focus-visible:ring-(--focus-ring) ring-3 ring-offset-1;
+}
+
+@utility ui_c_r_invalid {
+  @apply border-transparent outline outline-(--invalid-outline) outline-offset-0;
+}
+
+@utility ui-c_r-selected-indeterminate {
+
+  &[data-checked="true"],
+  &[data-indeterminate="true"] {
+    @apply bg-(--checkbox-bg) text-(--checkbox-fg)
   }
 }
 
 
 
-/* switch  */
-@utility switch {
-  border-radius: var(--toggle-radius, 9999px);
-  --u-knob-width: var(--knob-width, var(--knob-size));
-  --u-knob-height: var(--knob-height, var(--knob-size));
-  --u-knob-bg-checked: var(--knob-bg-checked, var(--knob-bg));
-  --u-knob-radius: var(--knob-radius, 9999px);
-  @apply appearance-none cursor-pointer w-(--toggle-width) h-(--toggle-height) relative before:absolute before:w-(--u-knob-width) before:h-(--u-knob-height) before:bg-(--knob-bg) before:rounded-(--u-knob-radius) ease-linear transition-all duration-300 before:left-(--knob-left) before:top-(--knob-top) checked:before:left-(--knob-checked-left) before:ease-linear before:transition-all before:duration-300 disabled:opacity-70 disabled:cursor-not-allowed checked:bg-current checked:before:bg-(--u-knob-bg-checked) 
-  outline-transparent  focus-visible:outline-(--ui-input-focus-outline) 
-  outline-2 outline-offset-2;
+@utility ui-c_r-group {
+  @apply space-y-3 has-[[slot=description]]:space-y-6 has-[[slot=description]]:**:data-[slot=label]:font-medium **:[[slot=description]]:block;
 }
 
-@utility switch-outline {
-  border-radius: var(--toggle-radius, 9999px);
-  --switch-border-width: var(--ui-switch-border-width, 1px);
-  --u-knob-width: var(--knob-width, var(--knob-size));
-  --u-knob-height: var(--knob-height, var(--knob-size));
-  --u-knob-bg-checked: var(--knob-bg-checked, var(--knob-bg));
-  --u-knob-radius: var(--knob-radius, 9999px);
-  @apply appearance-none [border-style:solid] [border-width:var(--switch-border-width)] cursor-pointer w-(--toggle-width) h-(--toggle-height) relative before:absolute before:w-(--u-knob-width) before:h-(--u-knob-height) before:bg-(--knob-bg) before:rounded-(--u-knob-radius) ease-linear transition-all duration-300 before:left-(--knob-left) before:top-(--knob-top) checked:before:left-(--knob-checked-left) before:ease-linear before:transition-all before:duration-300 disabled:opacity-70 disabled:cursor-not-allowed checked:bg-current checked:before:bg-(--u-knob-bg-checked) 
-  outline-transparent focus-visible:outline-(--ui-input-focus-outline) 
-  outline-2 outline-offset-2 ;
+@utility ui-c_r-wrapper {
+  @apply grid gap-y-1 gap-x-3;
 }
 
-@utility switch-xs {
-  --toggle-width: 2.25rem;
-  --toggle-height: 1.25rem;
-  --knob-size: 1rem;
-  --knob-left: 0.125rem;
-  --knob-top: 0.125rem;
-  --knob-checked-left: 1.125rem;
+@utility ui-c_r-wrapper-indicator {
+  @apply *:data-[slot=indicator]:col-start-1 *:data-[slot=indicator]:row-start-1;
 }
 
-@utility switch-outline-xs {
-  --toggle-width: 2.25rem;
-  --toggle-height: 1.25rem;
-  --knob-size: 1rem;
-  --knob-left: calc(0.125rem - var(--switch-border-width));
-  --knob-top: calc(0.125rem - var(--switch-border-width));
-  --knob-checked-left: calc(1.125rem - var(--switch-border-width));
+@utility ui-c_r-wrapper-label {
+  @apply *:data-[slot=label]:col-start-2 *:data-[slot=label]:row-start-1;
 }
 
-@utility switch-sm {
-  --toggle-width: 2.5rem;
-  --toggle-height: 1.5rem;
-  --knob-size: 1.25rem;
-  --knob-left: 0.125rem;
-  --knob-top: 0.125rem;
-  --knob-checked-left: 1.125rem;
+@utility ui-c_r-wrapper-description {
+  @apply has-[[slot=description]]:**:data-[slot=label]:font-medium *:[[slot=description]]:col-start-2 *:[[slot=description]]:row-start-2
 }
 
-@utility switch-outline-sm {
-  --toggle-width: 2.5rem;
-  --toggle-height: 1.5rem;
-  --knob-size: 1.25rem;
-  --knob-left: calc(0.125rem - var(--switch-border-width));
-  --knob-top: calc(0.125rem - var(--switch-border-width));
-  --knob-checked-left: calc(1.125rem - var(--switch-border-width));
-}
-
-@utility switch-md {
-  --toggle-width: 3rem;
-  --toggle-height: 1.75rem;
-  --knob-size: 1.25rem;
-  --knob-left: 0.25rem;
-  --knob-top: 0.25rem;
-  --knob-checked-left: 1.5rem;
-}
-
-@utility switch-outline-md {
-  --toggle-width: 3rem;
-  --toggle-height: 1.75rem;
-  --knob-size: 1.25rem;
-  --knob-left: calc(0.25rem - var(--switch-border-width));
-  --knob-top: calc(0.25rem - var(--switch-border-width));
-  --knob-checked-left: calc(1.5rem - var(--switch-border-width));
-}
-
-@utility switch-lg {
-  --toggle-width: 3.5rem;
-  --toggle-height: 2rem;
-  --knob-size: 1.5rem;
-  --knob-left: 0.25rem;
-  --knob-top: 0.25rem;
-  --knob-checked-left: 1.75rem;
-}
-
-@utility switch-outline-lg {
-  --toggle-width: 3.5rem;
-  --toggle-height: 2rem;
-  --knob-size: 1.5rem;
-  --knob-left: calc(0.25rem - var(--switch-border-width));
-  --knob-top: calc(0.25rem - var(--switch-border-width));
-  --knob-checked-left: calc(1.75rem - var(--switch-border-width));
+@utility ui-checkbox-base {
+  @apply in-disabled:bg-bg-muted relative size-(--checkbox-size) *:data-[slot=check-indicator]:size-(--checkbox-indicator-size) isolate flex shrink-0 items-center justify-center;
 }
 
 
-/* progress  */
-@utility ui-progressbar {
-  @apply appearance-none w-full [&::-moz-progress-bar]:rounded-(--ui-progressbar-radius) [&::-moz-progress-bar]:bg-current [&::-webkit-progress-bar]:w-full [&::-webkit-progress-bar]:rounded-(--ui-progressbar-radius) [&::-webkit-progress-bar]:bg-(--ui-progressbar-bg) [&::-webkit-progress-value]:rounded-(--ui-progressbar-radius) [&::-webkit-progress-value]:bg-current [&::-webkit-progress-value]:transition-all [&::-webkit-progress-value]:ease-linear [@supports(selector(::-moz-progress-bar))]:rounded-(--ui-progressbar-radius) [@supports(selector(::-moz-progress-bar))]:bg-(--ui-progressbar-bg);
+@utility ui-radio-base {
+  @apply relative isolate size-(--radio-size) flex before:absolute rounded-full before:rounded-full;
 }
 
-
-
-
-@utility ui-meter {
-  @apply appearance-none block w-full rounded-(--ui-meter-radius) bg-none [&::-webkit-meter-inner-element]:block [&::-webkit-meter-inner-element]:relative [&::-webkit-meter-optimum-value]:border-none [&::-webkit-meter-optimum-value]:bg-none [&::-webkit-meter-optimum-value]:bg-current [&::-webkit-meter-bar]:bg-none [&::-webkit-meter-bar]:border-none [&::-webkit-meter-bar]:h-full [&::-webkit-meter-bar]:bg-transparent [&::-webkit-meter-optimum-value]:transition-all [&::-webkit-meter-optimum-value]:rounded-(--ui-meter-radius) [&::-webkit-meter-optimum-value]:h-full [&::-moz-meter-bar]:bg-current [&::-moz-meter-bar]:border-none [&::-moz-meter-bar]:bg-none [&::-moz-meter-bar]:transition-all [&::-moz-meter-bar]:rounded-(--ui-meter-radius) [&::-moz-meter-bar]:h-full;
+@utility ui-radio-indicator {
+  @apply before:top-1/2 before:left-1/2 before:-translate-1/2 before:size-2 before:bg-current
 }
 
-
-
-/* input range  */
-
-@utility ui-input-range {
-  @apply w-full appearance-none bg-transparent disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none rounded-md cursor-pointer focus-visible:ring-2 focus-visible:ring-(--ring-bg) focus-visible:ring-offset-2 focus-visible:ring-offset-(--ring-offset-color) [&::-webkit-slider-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:ring-2 [&::-webkit-slider-thumb]:ring-current [&::-webkit-slider-thumb]:size-(--ui-input-range-size) [&::-webkit-slider-thumb]:-mt-(--ui-input-range-mt) [&::-webkit-slider-runnable-track]:group-disabled:opacity-60 [&::-webkit-slider-runnable-track]:bg-(--ui-input-range-track-bg) [&::-webkit-slider-runnable-track]:h-(--ui-input-range-track-height) [&::-webkit-slider-runnable-track]:rounded-lg [&::-webkit-slider-thumb]:bg-(--ui-input-range-thumb-bg) [&::-moz-range-thumb]:relative [&::-moz-range-thumb]:z-[1] [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:ring-2 [&::-moz-range-thumb]:ring-current [&::-moz-range-thumb]:bg-(--ui-input-range-thumb-bg) [&::-moz-range-thumb]:size-(--ui-input-range-size) [&::-moz-range-thumb]:-mt-(--ui-input-range-mt) [&::-moz-range-track]:group-disabled:opacity-50 [&::-moz-range-track]:bg-(--ui-input-range-track-bg) [&::-moz-range-track]:rounded-lg [&::-moz-range-track]:h-(--ui-input-range-track-height);
+@utility ui-data-segment-placeholder {
+  @apply text-(--ui-input-place-holder) [data-focused]:text-(--date-segment-focus-fg)
 }
+
+@utility ui-date-segment {
+  color: var(--date-segment-focus-fg) !important;
+  @apply bg-(--date-segment-focus-bg) forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]
+}
+
 

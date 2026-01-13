@@ -21,12 +21,17 @@ class CliSetup {
 
     private installDependencies(noBaseNodeModules: boolean) {
         if (noBaseNodeModules) this.installer.baseInstallation()
-        this.installer.installTailwindCSS();
+        if (this.framework === 'next') {
+            this.installer.installTailwindCSSForNextJS();
+        } else {
+            this.installer.installTailwindCSS();
+        }
 
         if (this.answers.framework === "vite" || this.answers.framework === "vite-ts") {
         //    do something here 
         }
         this.installer.installIconLibrary(this.answers.iconLibrary);
+        this.installer.installShadcnCli();
     }
 
     private generateFiles(framework: string) {

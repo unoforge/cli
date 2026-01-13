@@ -1,4 +1,6 @@
-
+@utility ui-radius {
+  @apply rounded-(--ui-radius);
+}
 
 @utility ui-soft {
   @apply bg-(--ui-soft-bg) text-(--ui-soft-text);
@@ -16,29 +18,6 @@
   @apply bg-(--ui-subtle-bg) border text-(--ui-subtle-text) border-(--ui-subtle-border);
 }
 
-@utility ui-popper {
-  @apply fixed left-(--fx-popper-placement-x) top-(--fx-popper-placement-y);
-}
-
-@utility u-fx-popper {
-  @apply fixed left-(--fx-popper-placement-x) top-(--fx-popper-placement-y);
-}
-
-@utility animated-modal-content {
-  animation-fill-mode: both;
-  animation: var(--un-modal-animation);
-  -webkit-animation: var(--un-modal-animation);
-}
-
-
-
-@utility ui-tabs-indicator {
-  width: var(--un-tab-indicator-width, 0px);
-  height: var(--un-tab-indicator-height, 0px);
-  top: var(--un-tab-indicator-top, 0px);
-  left: var(--un-tab-indicator-left, 0px);
-  position: absolute;
-}
 
 @utility aspect-utrawide {
   @apply aspect-[21/9];

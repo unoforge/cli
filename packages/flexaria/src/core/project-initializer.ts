@@ -8,7 +8,7 @@ import { ThemingPrompts } from "../helpers/theming-prompts";
 
 
 export class ProjectInitializer {
-    private supportedFrameworks = ['astro', 'rasengan', 'react', 'vite-react', 'vite-react-ts', 'tanstack-start', 'react-router', 'inertia-react'];
+    private supportedFrameworks = ['astro', 'rasengan', 'react-js', 'react-ts', 'tanstack-start', 'react-router', 'inertia-react', 'next'];
 
     constructor(
         private themingPrompts: ThemingPrompts = new ThemingPrompts()
@@ -46,8 +46,7 @@ export class ProjectInitializer {
                 process.exit(0);
             }
 
-            const framework = detectedFramework === 'vite-js' ? 'react' : detectedFramework === 'vite-ts' ? 'react' : detectedFramework;
-
+            const framework = detectedFramework;
             projectAnswers = await this.handleInitInProject(framework, options);
         }
 

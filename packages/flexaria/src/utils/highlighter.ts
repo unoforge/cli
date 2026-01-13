@@ -1,8 +1,8 @@
-import colors from "kleur"
+import chalk from "chalk"
 
 export const highlighter = {
-  error: colors.red,
-  warn: colors.yellow,
-  info: colors.cyan,
-  success: colors.green,
+  error: chalk.red,
+  warn: chalk.yellow,
+  info: chalk.cyan,
+  success: chalk.green,
 }

@@ -45,10 +45,11 @@ export class ProjectDetector {
                 const frameworkDetectors: Record<string, string | string[]> = {
                     'astro': 'astro',
                     'rasengan': 'rasengan',
-                    'react': 'react',
                     'tanstack-start': '@tanstack/react-start',
                     'react-router': '@react-router/node',
-                    'inertia-react': '@inertiajs/react'
+                    'inertia-react': '@inertiajs/react',
+                    'next': 'next',
+                    'react': 'react',
                 };
 
                 for (const [framework, keys] of Object.entries(frameworkDetectors)) {
