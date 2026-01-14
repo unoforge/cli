@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export class StubStorage {
-    private static basePath = join(__dirname, '../../stubs');
+    private static basePath = join(__dirname, '../stubs');
 
     static get(key: string): string {
         const path = key.replace(/\./g, '/') + '.stub';

@@ -1,4 +1,3 @@
-
 @utility dropdown-content {
   @apply grid max-h-[inherit] grid-cols-[auto_1fr] overflow-y-auto overscroll-contain outline-hidden *:[[role='group']+[role=group]]:mt-4 *:[[role='group']+[role=separator]]:mt-1
 }
@@ -7,6 +6,7 @@
   border-radius: calc(var(--dropdown-radius) - var(--dropdown-padding));
   @apply outline-none focus:outline rounded-md px-3.5 py-1.5 ease-linear duration-200 transition-colors;
 }
+
 
 @utility dropdown-item-grid {
   @apply col-span-full grid grid-cols-[auto_1fr_1.5rem_0.5rem_auto] supports-[grid-template-columns:subgrid]:grid-cols-subgrid;
@@ -20,21 +20,157 @@
   @apply focus:outline-danger focus:bg-danger-50 hover:bg-danger-100 text-danger dark:hover:bg-danger-500/10 dark:focus:bg-danger-500/10 **:slot-icon:text-danger/60 fx-focus-active:bg-danger-100 dark:fx-focus-active:bg-danger-500/10;
 }
 
-@utility dropdown-item-slot {
-  @apply not-has-[[slot=description]]:items-center has-[[slot=description]]:**:data-[slot=check-indicator]:mt-[1.5px] **:data-[slot=avatar]:*:mr-1.5 **:data-[slot=avatar]:*:size-6 **:data-[slot=avatar]:mr-(--mr-icon) **:data-[slot=avatar]:size-6 sm:**:data-[slot=avatar]:*:size-5 sm:**:data-[slot=avatar]:size-5
-}
 
 @utility dropdown-item-icon {
-  @apply *:slot-icon:mr-(--mr-icon) **:slot-icon:size-5 **:slot-icon:shrink-0 **:slot-icon:text-fg-muted sm:**:slot-icon:size-4;
+  @apply *:data-[slot=icon]:col-start-1 *:data-[slot=icon]:row-start-1 *:data-[slot=icon]:mr-(--mr-icon) *:data-[slot=icon]:-ml-0.5 *:data-[slot=icon]:shrink-0 [&_[data-slot='icon']:not([class*='text-'])]:text-fg-muted;
+}
+
+@utility dropdown-item-has-description {
+  @apply not-has-[[slot=description]]:*:data-[slot=icon]:text-sm sm:not-has-[[slot=description]]:*:data-[slot=icon]:text-xs
+}
+
+@utility dropdown-item-description {
+  @apply has-[[slot=description]]:*:data-[slot=icon]:h-lh has-[[slot=description]]:[&_[data-slot='icon']:not([class*='w-'])]:text-sm sm:has-[[slot=description]]:[&_[data-slot='icon']:not([class*='w-'])]:text-xs
 }
 
 @utility dropdown-item-label {
   @apply [&>[slot=label]+[data-slot=icon]]:absolute [&>[slot=label]+[data-slot=icon]]:right-1;
 }
 
-@utility dropdown-item-force-color {
-  @apply forced-color-adjust-none forced-colors:text-[CanvasText] forced-colors:**:slot-icon:text-[CanvasText] forced-colors:group-focus:**:slot-icon:text-[CanvasText]
+@utility dropdown-item-avatar {
+  @apply *:data-[slot=avatar]:*:mr-(--mr-icon) *:data-[slot=avatar]:mr-(--mr-icon) has-[[slot=description]]:*:data-[slot=avatar]:row-span-2 *:data-[slot=avatar]:[--avatar-size:--spacing(6)] sm:*:data-[slot=avatar]:[--avatar-size:--spacing(5)];
 }
+
+@utility dropdown-item-force-color {
+  @apply forced-color-adjust-none forced-colors:text-[CanvasText] forced-colors:**:slot-icon:text-[CanvasText] forced-colors:group-focus:**:slot-icon:text-[CanvasText];
+}
+
+/* ================================== */
+/* popover
+ */
+
+@utility dropdown-item-radius {
+  --popover-inner-radius: calc(var(--popover-radius) - var(--popover-padding));
+}
+
+/* animation */
+@utility popover-animation {
+  @apply placement-left:exiting:slide-out-to-right-1 placement-right:exiting:slide-out-to-left-1 placement-top:exiting:slide-out-to-bottom-1 placement-bottom:exiting:slide-out-to-top-1 placement-left:entering:slide-in-from-right-1 placement-right:entering:slide-in-from-left-1 placement-top:entering:slide-in-from-bottom-1 placement-bottom:entering:slide-in-from-top-1;
+
+}
+
+
+/* dropdown hover and states  */
+@utility dropdown-item-hover {
+  @apply forced-colors:bg-[Highlight] forced-colors:text-[HighlightText];
+
+  &[data-hovered="true"],
+  &[data-focused="true"] {
+    @apply bg-(--dropdown-item-hover-and-select) text-(--dropdown-item-hover-and-select-fg);
+  }
+}
+
+@utility dropdown-item-danger {
+  @apply [--dropdown-item-hover-and-select:var(--dropdown-item-danger-hover-and-select)] [--dropdown-item-hover-and-select-fg:var(--dropdown-item-danger-hover-and-select-fg)] [--dropdown-item-selected-fg:var(--dropdown-item-danger-fg)];
+}
+
+@utility dropdown-item-warning {
+  @apply [--dropdown-item-hover-and-select:var(--dropdown-item-warning-hover-and-select)] [--dropdown-item-hover-and-select-fg:var(--dropdown-item-warning-hover-and-select-fg)] [--dropdown-item-selected-fg:var(--dropdown-item-warning-fg)];
+}
+
+@utility dropdown-item-selected {
+  &[data-selected="true"] {
+    @apply text-(--dropdown-item-selected-fg);
+  }
+}
+
+@utility dropdown-item-disabled {
+  &[data-disabled="true"] {
+    @apply opacity-50 forced-colors:text-[GrayText];
+  }
+}
+
+
+@utility modal-overlay {
+  height: var(--visual-viewport-height,100vh);
+  @apply fixed inset-0 z-50 bg-gray-800/60
+}
+
+@utility sheet-overlay {
+  @apply fixed inset-0 z-50 h-(--page-height) w-screen overflow-hidden bg-gray-800/60;
+}
+
+@utility modal-overlay-entering {
+  @apply entering:fade-in entering:animate-in entering:duration-300 entering:ease-out;
+}
+
+@utility modal-overlay-exiting {
+  @apply exiting:fade-out exiting:animate-out exiting:ease-in;
+}
+
+@utility modal-overlay-grid {
+  @apply grid grid-rows-[1fr_auto] justify-items-center sm:grid-rows-[1fr_auto_3fr]
+}
+
+
+@utility modal-transition-entering {
+  @apply entering:slide-in-from-bottom sm:entering:zoom-in-95 sm:entering:slide-in-from-bottom-0 entering:animate-in entering:duration-300 entering:ease-out;
+}
+
+@utility modal-transition-exiting {
+  @apply exiting:slide-out-to-bottom sm:exiting:zoom-out-95 sm:exiting:slide-out-to-bottom-0 exiting:animate-out exiting:ease-in;
+}
+
+@utility modal-size-fullscreen {
+  :is(& *) {
+    &[data-slot="dialog-body"] {
+      min-height: calc(var(--visual-viewport-height) - var(--visual-viewport-vertical-padding) - var(--dialog-header-height, 0px) - var(--dialog-footer-height, 0px));
+    }
+  }
+
+  @apply sm:rounded-ui sm:[--visual-viewport-vertical-padding:16px]
+}
+
+@utility overlay-on-enterring {
+  @apply entering:fade-in entering:animate-in entering:duration-500
+}
+
+@utility overlay-on-exiting {
+  @apply exiting:fade-out exiting:animate-out exiting:duration-300
+}
+
+@utility dialog-footer {
+  gap: var(--gap, calc(var(--spacing) * 3));
+  padding-top: calc(var(--gutter) - calc(var(--spacing) * 3));
+  @apply p-(--gutter) flex items-center;
+}
+
+
+/* range calendar  */
+@utility cell-selection-selected {
+  @apply fx-selected:bg-(--range-selected-bg)
+}
+
+@utility cell-radius {
+  @apply [td:first-child_&]:rounded-s-ui data-selection-start:rounded-s-ui [td:last-child_&]:rounded-e-ui data-selection-end:rounded-e-ui
+}
+
+
+@utility cell-span-selection-none {
+  @apply group-hover:bg-bg-muted/60 group-data-pressed:bg-bg-muted/80
+}
+
+@utility cell-span-selection-middle-base {
+  @apply text-(--range-selected-fg)! group-hover:bg-(--range-selected-bg-hover) group-data-pressed:bg-(--range-selected-bg-pressed) forced-colors:group-hover:bg-[Highlight]
+}
+
+@utility cell-span-selection-middle-invalid {
+  @apply text-(--range-selected-invalid-fg) group-invalid:group-hover:bg-(--range-selected-invalid-bg-hover) group-invalid:group-data-pressed:bg-(--range-selected-invalid-bg-pressed) forced-colors:group-invalid:group-hover:bg-[Mark]
+}
+
+
+
+
 
 @utility ui-card {
   @apply p-(--card-padding) rounded-(--card-radius)
@@ -44,169 +180,10 @@
   border-radius: calc(var(--card-radius) - var(--card-padding));
 }
 
-
-
-
-
-
-@utility d-flex-justify-center {
-  @apply flex justify-center;
-}
-
-@utility d-flex-justify-start {
-  @apply flex justify-start;
-}
-
-@utility d-flex-justify-end {
-  @apply flex justify-end;
-}
-
-@utility d-flex-items-start {
-  @apply flex items-start;
-}
-
 @utility d-flex-items-center {
   @apply flex items-center;
 }
 
-@utility d-flex-items-end {
-  @apply flex items-end;
-}
-
-@utility d-flex-between {
-  @apply flex justify-between;
-}
-
 @utility d-flex-place-center {
   @apply flex justify-center items-center;
-}
-
-
-
-
-@utility ui-grid-dotted {
-  background-image: radial-gradient(currentColor var(--dotsize), var(--bg-grid-dotted) var(--dotsize));
-  background-size: var(--unify-ui-grid-width) var(--unify-ui-grid-height);
-}
-
-@utility ui-radial-gradient {
-  background: radial-gradient(125% 125% at 50% 10%, var(--unify-radial-bg) 40%, currentColor 100%);
-}
-
-@utility ui-grid {
-  --unify-grid-color: currentColor;
-  background-image: linear-gradient(to right, var(--unify-grid-color) 1px, transparent 1px), linear-gradient(to bottom, var(--unify-grid-color) 1px, transparent 1px);
-  background-size: var(--unify-ui-grid-width) var(--unify-ui-grid-height);
-}
-
-@utility ui-striper-overlay-mask {
-  mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 110%);
-}
-
-@utility ui-grid-w-xs {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-xs);
-}
-
-@utility ui-grid-w-sm {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-sm);
-}
-
-@utility ui-grid-w-md {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-md);
-}
-
-@utility ui-grid-w-lg {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-lg);
-}
-
-@utility ui-grid-w-xl {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-xl);
-}
-
-@utility ui-grid-w-2xl {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-2xl);
-}
-
-@utility ui-grid-h-xs {
-  --unify-ui-grid-height: var(--unify-ui-grid-height-xs);
-}
-
-@utility ui-grid-h-sm {
-  --unify-ui-grid-height: var(--unify-ui-grid-height-sm);
-}
-
-@utility ui-grid-h-md {
-  --unify-ui-grid-height: var(--unify-ui-grid-height-md);
-}
-
-@utility ui-grid-h-lg {
-  --unify-ui-grid-height: var(--unify-ui-grid-height-lg);
-}
-
-@utility ui-grid-h-xl {
-  --unify-ui-grid-height: var(--unify-ui-grid-height-xl);
-}
-
-@utility ui-grid-h-2xl {
-  --unify-ui-grid-height: var(--unify-ui-grid-height-2xl);
-}
-
-@utility ui-grid-square-xs {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-xs);
-  --unify-ui-grid-height: var(--unify-ui-grid-width-xs);
-}
-
-@utility ui-grid-square-sm {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-sm);
-  --unify-ui-grid-height: var(--unify-ui-grid-width-sm);
-}
-
-@utility ui-grid-square-md {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-md);
-  --unify-ui-grid-height: var(--unify-ui-grid-width-md);
-}
-
-@utility ui-grid-square-lg {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-lg);
-  --unify-ui-grid-height: var(--unify-ui-grid-width-lg);
-}
-
-@utility ui-grid-square-xl {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-xl);
-  --unify-ui-grid-height: var(--unify-ui-grid-width-xl);
-}
-
-@utility ui-grid-square-2xl {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-2xl);
-  --unify-ui-grid-height: var(--unify-ui-grid-width-2xl);
-}
-
-@utility ui-grid-rec-xs {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-xs);
-  --unify-ui-grid-height: var(--unify-ui-grid-height-xs);
-}
-
-@utility ui-grid-rec-sm {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-sm);
-  --unify-ui-grid-height: var(--unify-ui-grid-height-sm);
-}
-
-@utility ui-grid-rec-md {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-md);
-  --unify-ui-grid-height: var(--unify-ui-grid-height-md);
-}
-
-@utility ui-grid-rec-lg {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-lg);
-  --unify-ui-grid-height: var(--unify-ui-grid-height-lg);
-}
-
-@utility ui-grid-rec-xl {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-xl);
-  --unify-ui-grid-height: var(--unify-ui-grid-height-xl);
-}
-
-@utility ui-grid-rec-2xl {
-  --unify-ui-grid-width: var(--unify-ui-grid-width-2xl);
-  --unify-ui-grid-height: var(--unify-ui-grid-height-2xl);
 }

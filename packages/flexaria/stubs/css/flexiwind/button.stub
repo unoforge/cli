@@ -9,7 +9,7 @@
 }
 
 @utility btn-icon-xs {
-  @apply size-6 justify-center;
+  @apply size-6 text-xs justify-center;
 }
 
 @utility btn-sm {
@@ -17,7 +17,7 @@
 }
 
 @utility btn-icon-sm {
-  @apply size-8 justify-center;
+  @apply size-8 text-sm justify-center;
 }
 
 @utility btn-md {
@@ -25,7 +25,7 @@
 }
 
 @utility btn-icon-md {
-  @apply size-10 justify-center;
+  @apply size-10 justify-center text-sm;
 }
 
 @utility btn-lg {
@@ -33,7 +33,7 @@
 }
 
 @utility btn-icon-lg {
-  @apply size-12 justify-center;
+  @apply size-12 justify-center text-sm;
 }
 
 @utility btn-xl {
@@ -41,7 +41,7 @@
 }
 
 @utility btn-icon-xl {
-  @apply size-14 justify-center
+  @apply size-14 justify-center text-sm;
 }
 
 

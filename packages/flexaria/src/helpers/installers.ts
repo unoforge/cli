@@ -8,6 +8,7 @@ class Installers {
         private packageManager: Package_Manager, private pkgManager = new PackageManager(packageManager), private spin = spinner()) {
     }
     baseInstallation() {
+        //tw-animate-css
         this.pkgManager.changeDirectory(this.dir)
         const cmd = `${this.packageManager} install`
         try {
@@ -21,7 +22,18 @@ class Installers {
     }
 
     installTailwindCSSForNextJS() {
-        
+        // For Next.js, we do not use @tailwindcss/vite. Install standard PostCSS toolchain.
+        if (!this.pkgManager.isInstalled('tailwindcss')) {
+            this.pkgManager.install('tailwindcss postcss autoprefixer', true);
+        } else {
+            // Ensure postcss and autoprefixer exist as well
+            if (!this.pkgManager.isInstalled('postcss')) {
+                this.pkgManager.install('postcss', true);
+            }
+            if (!this.pkgManager.isInstalled('autoprefixer')) {
+                this.pkgManager.install('autoprefixer', true);
+            }
+        }
     }
 
     installTailwindCSS() {
@@ -41,6 +53,13 @@ class Installers {
             this.pkgManager.install(`@iconify-json/${iconLibrary}`, true, true);
         } catch (e) {
             console.log('Icon library is already installed.');
+        }
+    }
+
+    installShadcnCli() {
+        // Install shadcn CLI locally so users can run with package manager dlx or npx
+        if (!this.pkgManager.isInstalled('shadcn')) {
+            this.pkgManager.install('shadcn', true, true);
         }
     }
 }

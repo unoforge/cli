@@ -18,6 +18,11 @@ export const THEMING_MODES = [
         value: "dark",
         selected: false
     },
+    {
+        title: "Multi theming",
+        value: "multi",
+        selected: false
+    },
 ]
 
 
@@ -63,7 +68,7 @@ export const ICON_LIBRARIES = [
         title: "Lucide",
         value: "lucide",
         selected: false
-    }, 
+    },
 ]
 
 export const DIR_PERMISSIONS = 0o755;
@@ -92,6 +97,10 @@ export const DEFAULT_PATHS = [
     },
     {
         framework: "inertia-react",
+        cssPath: "resources/css/"
+    },
+    {
+        framework: "laravel",
         cssPath: "resources/css/"
     }
 ]

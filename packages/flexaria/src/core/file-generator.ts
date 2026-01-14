@@ -11,16 +11,13 @@ import { ProjectDetector } from './project-detector';
 export class FileGenerator {
     static generateBaseFiles(framework: string, answers: ProjectAnswers): void {
         const mainCssFileName = this.getMainCssFileName();
-
         this.createFlexiwindFiles(answers, mainCssFileName);
         this.createFrameworkSpecificFiles(framework, answers);
         this.generateConfigFiles(answers);
     }
 
     private static createShared(answers: ProjectAnswers): void {
-
         const cssFolder = answers.cssPath || 'src/css/';
-
 
         if (!existsSync(cssFolder)) {
             mkdirSync(cssFolder, { recursive: true, mode: DIR_PERMISSIONS });
@@ -28,13 +25,10 @@ export class FileGenerator {
         if (!existsSync(`${cssFolder}/flexiwind`)) {
             mkdirSync(`${cssFolder}/flexiwind`, { recursive: true, mode: DIR_PERMISSIONS });
         }
-
-
     }
 
     private static createFlexiwindFiles(answers: ProjectAnswers, mainCssFileName: string): void {
-        const hasSrc = ProjectDetector.hasSrcDir();
-        const cssFolder = answers.cssPath || (hasSrc ? 'src/' : './');
+        const cssFolder = answers.cssPath 
         const themingMode = answers.themingMode || 'light';
         const theme = answers.theme || 'default';
 
@@ -68,6 +62,10 @@ export class FileGenerator {
         writeFileSync(
             join(cssFolder, 'flexiwind/utils.css'),
             StubStorage.get('css.flexiwind.utils')
+        );
+        writeFileSync(
+            join(cssFolder, 'flexiwind/grid-bg.css'),
+            StubStorage.get('css.flexiwind.grid-bg')
         );
         writeFileSync(
             join(cssFolder, 'button-styles.css'),
@@ -128,14 +126,17 @@ export class FileGenerator {
             case 'next':
                 // this.createVueFiles(answers);
                 break;
-            case 'laravel-inertia':
+            case 'inertia-react':
                 // this.createVueFiles(answers);
                 break;
             case 'tanstack-start':
                 // this.createSvelteFiles(answers);
                 break;
+            case 'react':
             case 'react-js':
             case 'react-ts':
+            case 'vite-js':
+            case 'vite-ts':
                 this.createReactFiles(answers);
                 break;
         }

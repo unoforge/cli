@@ -1,5 +1,5 @@
 export type ListPackageManager = 'pnpm' | 'yarn' | 'npm' | 'bun';
-export type ThemingMode = "both" | "dark" | "light";
+export type ThemingMode = "both" | "dark" | "light" | "multi";
 
 export type ProjectAnswers = {
     framework: string;
@@ -18,5 +18,3 @@ export type InitOptions = {
     cssPath?: string;
     cwd?: string
 }
-
-
