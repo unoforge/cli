@@ -20,12 +20,9 @@ export class StyleWindBoth {
     --bg-subtle: var(--color-gray-50);
     --bg-surface: var(--color-gray-100);
     --bg-muted: var(--color-gray-200);
-    --bg-surface-elevated: var(--color-gray-300);
     --card: var(--bg);
     --card-gray: var(--bg-surface);
     --overlay: var(--bg);
-    --overlay-gray: var(--card-gray);
-    --progressbar: var(--bg-surface);
 
     /* foreground colors  */
     --fg: var(--color-gray-700);
@@ -37,7 +34,6 @@ export class StyleWindBoth {
     --border: var(--color-gray-200);
     --border-subtle: var(--color-gray-100);
     --border-strong: var(--color-gray-300);
-    --border-amphasis: var(--color-gray-400);
     --border-input: var(--color-gray-200);
     --border-card: var(--border);
 }
@@ -56,7 +52,6 @@ export class StyleWindBoth {
     --bg-subtle: var(--color-gray-900);
     --bg-surface: var(--color-gray-800);
     --bg-muted: var(--color-gray-700);
-    --bg-surface-elevated: var(--color-gray-600);
 
   /* foreground colors  */
     --fg: var(--color-gray-300);
@@ -68,7 +63,6 @@ export class StyleWindBoth {
     --border: var(--color-gray-900);
     --border-subtle: var(--color-gray-950);
     --border-strong: var(--color-gray-800);
-    --border-amphasis: var(--color-gray-700);
     --border-input: var(--color-gray-800);
 }
 
@@ -105,17 +99,12 @@ export class StyleWindBoth {
     --color-bg-subtle: var(--bg-subtle);
     --color-bg-surface: var(--bg-surface);
     --color-bg-muted: var(--bg-muted);
-    --color-bg-surface-elevated: var(--bg-surface-elevated);
     --color-card: var(--card);
     --color-card-gray: var(--card-gray);
     --color-popover: var(--bg);
-    --color-popover-gray: var(--card-gray);
     --color-overlay: var(--overlay);
-    --color-overlay-gray: var(--overlay-gray);
-    --color-progressbar: var(--progressbar);
 
     --color-border-strong: var(--border-strong);
-    --color-border-amphasis: var(--border-amphasis);
     --color-border: var(--border);
     --color-border-card: var(--border-card);
     --color-border-input: var(--border-input);

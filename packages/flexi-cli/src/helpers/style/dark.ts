@@ -27,14 +27,9 @@ export class StyleWindDark {
   --color-bg-subtle: var(--color-gray-900);
   --color-bg-surface: var(--color-gray-800);
   --color-bg-muted: var(--color-gray-700);
-  --color-bg-surface-elevated: var(--color-gray-600);
   --color-card: var(--color-bg);
-  --color-card-gray: var(--color-bg-surface);
   --color-popover: var(--color-bg);
-  --color-popover-gray: var(--color-bg-surface);
   --color-overlay: var(--color-bg);
-  --color-overlay-gray: var(--color-bg-surface);
-  --color-progressbar: var(--color-bg-muted);
 
   /* foreground colors  */
   --color-fg: var(--color-gray-300);
@@ -46,7 +41,6 @@ export class StyleWindDark {
   --color-border: var(--color-gray-900);
   --color-border-subtle: var(--color-gray-950);
   --color-border-strong: var(--color-gray-800);
-  --color-border-amphasis: var(--color-gray-700);
   --color-border-input: var(--color-gray-800);
 }`;
         return { root, theme };
