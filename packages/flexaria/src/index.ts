@@ -2,6 +2,7 @@
 
 import { Command } from "commander"
 import { initCommand } from "./commands/init"
+import { fixIconsCommand } from "./commands/fix-icons"
 import { readFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -27,6 +28,7 @@ async function main() {
     )
 
   program.addCommand(initCommand)
+  program.addCommand(fixIconsCommand)
   program.parse()
 }
 

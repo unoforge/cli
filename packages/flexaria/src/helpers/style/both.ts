@@ -21,15 +21,11 @@ export class StyleWindBoth {
     --c-bg-subtle: var(--color-gray-100);
     --c-bg-surface: var(--color-gray-50);
     --c-bg-muted: var(--color-gray-200);
-    --c-bg-surface-elevated: var(--color-gray-300);
     --c-card: var(--color-bg);
-    --c-card-gray: var(--color-bg-subtle);
     --c-overlay: var(--c-bg);
-    --c-overlay-gray: var(--c-bg-subtle);
 
 
     --c-border-strong: var(--color-gray-300);
-    --c-border-amphasis: var(--color-gray-400);
     --c-border: var(--color-gray-200);
     --c-border-sub: var(--color-gray-100);
     --c-border-card:var(--color-gray-200);
@@ -103,10 +99,8 @@ export class StyleWindBoth {
     --c-bg-subtle: var(--color-gray-900);
     --c-bg-surface: --aplha(var(--color-gray-900)/80%);
     --c-bg-muted: var(--color-gray-800);
-    --c-bg-surface-elevated: var(--color-gray-700);
 
     --c-border-strong: var(--color-gray-700);
-    --c-border-amphasis: var(--color-gray-600);
     --c-border: var(--color-gray-900);
     --c-border-sub: var(--color-gray-900);
     --c-border-card:var(--color-gray-800);
@@ -162,17 +156,11 @@ export class StyleWindBoth {
     --color-bg-subtle: var(--c-bg-subtle);
     --color-bg-surface: var(--c-bg-surface);
     --color-bg-muted: var(--c-bg-muted);
-    --color-bg-surface-elevated: var(--c-bg-surface-elevated);
     --color-card: var(--c-card);
-    --color-card-gray: var(--c-card-gray);
     --color-popover: var(--c-bg);
-    --color-popover-gray: var(--c-card-gray);
     --color-overlay: var(--c-overlay);
-    --color-overlay-gray: var(--c-overlay-gray);
-    --color-progressbar: var(--c-progressbar);
-
+    
     --color-border-strong: var(--c-border-strong);
-    --color-border-amphasis: var(--c-border-amphasis);
     --color-border: var(--c-border);
     --color-border-sub: var(--c-border-sub);
     --color-border-card: var(--c-border-card);

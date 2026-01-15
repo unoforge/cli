@@ -26,14 +26,9 @@ export class StyleWindLight {
     --color-bg-subtle: var(--color-gray-50);
     --color-bg-surface: var(--color-gray-100);
     --color-bg-muted: var(--color-gray-200);
-    --color-bg-surface-elevated: var(--color-gray-300);
     --color-card: var(--color-bg);
-    --color-card-gray: var(--color-bg-surface);
     --color-popover: var(--color-bg);
-    --color-popover-gray: var(--color-bg-surface);
     --color-overlay: var(--color-bg);
-    --color-overlay-gray: var(--color-bg-surface);
-    --color-progressbar: var(--color-bg-muted);
 
     /* foreground colors  */
     --color-fg: var(--color-gray-700);
@@ -45,7 +40,6 @@ export class StyleWindLight {
     --color-border: var(--color-gray-200);
     --color-border-subtle: var(--color-gray-100);
     --color-border-strong: var(--color-gray-300);
-    --color-border-amphasis: var(--color-gray-400);
     --color-border-input: var(--color-gray-200);
 }
 `;

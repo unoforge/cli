@@ -79,17 +79,11 @@ export class StyleWindDark {
     --color-bg-subtle: var(--color-gray-900);
     --color-bg-surface: --alpha(var(--color-gray-900)/80%);
     --color-bg-muted: var(--color-gray-800);
-    --color-bg-surface-elevated: var(--color-gray-700);
     --color-card: var(--color-bg);
-    --color-card-gray: var(--color-gray-800);
     --color-popover: var(--color-bg);
-    --color-popover-gray: var(--color-card-gray);
     --color-overlay: var(--color-gray-950);
-    --color-overlay-gray: var(--color-gray-900);
-    --color-progressbar: var(--color-gray-600);
-
+    
     --color-border-strong: var(--color-gray-700);
-    --color-border-amphasis: var(--color-gray-600);
     --color-border: var(--color-gray-900);
     --color-border-sub: var(--color-gray-900);
     --color-border-card: var(--color-gray-800);

@@ -79,17 +79,11 @@ export class StyleWindLight {
     --color-bg-subtle: var(--color-gray-100);
     --color-bg-surface: var(--color-gray-50);
     --color-bg-muted: var(--color-gray-200);
-    --color-bg-surface-elevated: var(--color-gray-300);
     --color-card: var(--color-bg);
-    --color-card-gray: var(--color-gray-100);
     --color-popover: var(--color-bg);
-    --color-popover-gray: var(--color-card-gray);
     --color-overlay: var(--color-gray-950);
-    --color-overlay-gray: var(--color-gray-900);
-    --color-progressbar: var(--color-gray-600);
-
+    
     --color-border-strong: var(--color-gray-300);
-    --color-border-amphasis: var(--color-gray-400);
     --color-border: var(--color-gray-200);
     --color-border-sub: var(--color-gray-100);
     --color-border-card: var(--color-gray-200);
