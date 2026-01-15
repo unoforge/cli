@@ -19,7 +19,7 @@ async function main() {
   const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"))
 
   const program = new Command()
-    .name("j-rac")
+    .name("flexaria")
     .description("A CLI tool for rapidly scaffolding ReactJS based applications using Flexiwind")
     .version(
       packageJson.version || "1.0.0",
