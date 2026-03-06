@@ -1,0 +1,24 @@
+{
+    "name": "unoforge/flexi-core",
+    "description": "Core logic for Flexi CLI",
+    "version": "1.0.4",
+    "type": "library",
+    "require": {
+        "symfony/yaml": "^7.3 || ^8.0",
+        "symfony/http-client": "^7.3 || ^8.0",
+        "laravel/prompts": "^0.3.10",
+        "symfony/process": "^7.3 || ^8.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "FlexiCore\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Johnkat Mj",
+            "email": "johnkatembue4@gmail.com"
+        }
+    ]
+}

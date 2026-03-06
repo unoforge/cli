@@ -1,0 +1,29 @@
+{
+    "name": "unoforge/flexi-monorepo",
+    "description": "Monorepo for Flexi CLI packages",
+    "type": "project",
+    "require": {},
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/core",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "packages/cli",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "packages/laravel",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
+}
