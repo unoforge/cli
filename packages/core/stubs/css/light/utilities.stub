@@ -37,6 +37,10 @@
     --ui-outline-text: var(--color-danger-600);
 }
 
+@utility ui-soft-gray {
+    --ui-soft-bg: --alpha(var(--color-gray-200) / 40%);
+    --ui-soft-text: var(--color-gray-700);
+}
 @utility ui-soft-success {
     --ui-soft-bg: --alpha(var(--color-success-100) / 40%);
     --ui-soft-text: var(--color-success-600);
@@ -50,6 +54,12 @@
 @utility ui-soft-danger {
     --ui-soft-bg: --alpha(var(--color-danger-100) / 40%);
     --ui-soft-text: var(--color-danger-600);
+}
+
+@utility ui-subtle-gray {
+    --ui-subtle-bg: --alpha(var(--color-gray-200) / 40%);
+    --ui-subtle-text: var(--color-gray-700);
+    --ui-subtle-border: var(--color-gray-200);
 }
 
 @utility ui-subtle-success {

@@ -18,8 +18,6 @@ class CssStyleCompose
     --radius-card: var(--card-radius);
     --radius-checkbox: var(--checkbox-radius); 
     
-
-    --color-white: var(--color-white);
     --color-dark: var(--color-gray-950);
 
     --color-primary: var(--primary);

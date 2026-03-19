@@ -149,7 +149,7 @@ class FlexiInitCommand extends Command
   ██╔══╝  ██║     ██╔══╝   ██╔██╗ ██║     ██║     ██║     ██║
   ██║     ███████╗███████╗██╔╝ ██╗██║     ╚██████╗███████╗██║
   ╚═╝     ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝      ╚═════╝╚══════╝╚═╝
-  Laravel-native Flexi command
+  Made for Artisans by Artisans
 </>
 ASCII);
     }

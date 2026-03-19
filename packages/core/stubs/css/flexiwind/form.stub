@@ -1,7 +1,31 @@
-
-/* input  */
 @utility ui-form-input {
   @apply disabled:hover:cursor-not-allowed disabled:opacity-80 outline-offset-0 focus:outline-offset-0 focus:border-transparent outline outline-transparent focus:outline-(--ui-input-focus-outline) ring-transparent ring-offset-transparent focus:ring-(--focus-ring) ring-3 ring-offset-1 transition-all ease-linear duration-200;
+}
+
+@utility ui-form-group-base {
+  @apply w-full has-data-invalide:outline-(--ui-input-invalid-outline);
+}
+
+@utility ui-form-group {
+  @apply disabled:hover:cursor-not-allowed disabled:opacity-80 outline-offset-0 focus-within:outline-offset-0 focus-within:border-transparent outline outline-transparent focus-within:outline-(--ui-input-focus-outline) ring-transparent ring-offset-transparent focus-within:ring-(--focus-ring) ring-3 ring-offset-1 transition-all ease-linear duration-200;
+
+  & input,
+  & select {
+    @apply outline-none focus:outline-none appearance-none;
+  }
+}
+
+
+@utility ui-form-group-input {
+
+  & input {
+    @apply outline-none focus:outline-none;
+  }
+
+  & input,
+  & select {
+    @apply flex-1 placeholder-(--ui-input-place-holder) leading-6 text-sm;
+  }
 }
 
 @utility ui-form-input-xs {
@@ -25,18 +49,22 @@
 }
 
 @utility ui-form-base {
-  @apply appearance-none w-full placeholder-[color:var(--ui-input-place-holder)] invalid:[outline-color:var(--ui-input-invalid-outline)] [line-height:1.5rem];
+  @apply appearance-none w-full placeholder-(--ui-input-place-holder) data-invalid:outline-(--ui-input-invalid-outline) leading-6;
 }
+
 
 
 @utility ui-form-select {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="%236b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>');
-  @apply appearance-none w-full placeholder-[color:var(--ui-input-place-holder)] [line-height:1.5rem] [background-position:right_0.5rem_center] [background-repeat:no-repeat] [background-size:1.5em_1.5em] [padding-right:2.5rem] [print-color-adjust:exact];
+  @apply appearance-none w-full placeholder-(--ui-input-place-holder) leading-6;
 }
 
-@utility flexi-form-select {
-  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23000000%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cpath%20d%3D%22M181.66%2C170.34a8%2C8%2C0%2C0%2C1%2C0%2C11.32l-48%2C48a8%2C8%2C0%2C0%2C1-11.32%2C0l-48-48a8%2C8%2C0%2C0%2C1%2C11.32-11.32L128%2C212.69l42.34-42.35A8%2C8%2C0%2C0%2C1%2C181.66%2C170.34Zm-96-84.68L128%2C43.31l42.34%2C42.35a8%2C8%2C0%2C0%2C0%2C11.32-11.32l-48-48a8%2C8%2C0%2C0%2C0-11.32%2C0l-48%2C48A8%2C8%2C0%2C0%2C0%2C85.66%2C85.66Z%22%2F%3E%3C%2Fsvg%3E');
-  @apply appearance-none w-full placeholder-[color:var(--ui-input-place-holder)] [line-height:1.5rem] [background-position:right_0.5rem_center] [background-repeat:no-repeat] [background-size:1.5em_1.5em] [padding-right:2.5rem] [print-color-adjust:exact];
+@utility ui-form-select-indicator {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="%236b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>');
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  print-color-adjust: exact;
 }
 
 @utility ui-form-multiselect {
@@ -79,9 +107,7 @@
   --u-knob-height: var(--knob-height, var(--knob-size));
   --u-knob-bg-checked: var(--knob-bg-checked, var(--knob-bg));
   --u-knob-radius: var(--knob-radius, 9999px);
-  @apply appearance-none cursor-pointer w-(--toggle-width) h-(--toggle-height) relative before:absolute before:w-(--u-knob-width) before:h-(--u-knob-height) before:bg-(--knob-bg) before:rounded-(--u-knob-radius) ease-linear transition-all duration-300 before:left-(--knob-left) before:top-(--knob-top) checked:before:left-(--knob-checked-left) before:ease-linear before:transition-all before:duration-300 disabled:opacity-70 disabled:cursor-not-allowed checked:bg-current checked:before:bg-(--u-knob-bg-checked) 
-  outline-transparent  focus-visible:outline-(--ui-input-focus-outline) 
-  outline-2 outline-offset-2;
+  @apply appearance-none cursor-pointer w-(--toggle-width) h-(--toggle-height) relative before:absolute before:w-(--u-knob-width) before:h-(--u-knob-height) before:bg-(--knob-bg) before:rounded-(--u-knob-radius) ease-linear transition-all duration-300 before:left-(--knob-left) before:top-(--knob-top) checked:before:left-(--knob-checked-left) before:ease-linear before:transition-all before:duration-300 disabled:opacity-70 disabled:cursor-not-allowed checked:bg-current checked:before:bg-(--u-knob-bg-checked) outline-transparent focus-visible:outline-(--ui-input-focus-outline) outline-2 outline-offset-2;
 }
 
 @utility switch-outline {
@@ -91,9 +117,7 @@
   --u-knob-height: var(--knob-height, var(--knob-size));
   --u-knob-bg-checked: var(--knob-bg-checked, var(--knob-bg));
   --u-knob-radius: var(--knob-radius, 9999px);
-  @apply appearance-none [border-style:solid] [border-width:var(--switch-border-width)] cursor-pointer w-(--toggle-width) h-(--toggle-height) relative before:absolute before:w-(--u-knob-width) before:h-(--u-knob-height) before:bg-(--knob-bg) before:rounded-(--u-knob-radius) ease-linear transition-all duration-300 before:left-(--knob-left) before:top-(--knob-top) checked:before:left-(--knob-checked-left) before:ease-linear before:transition-all before:duration-300 disabled:opacity-70 disabled:cursor-not-allowed checked:bg-current checked:before:bg-(--u-knob-bg-checked) 
-  outline-transparent focus-visible:outline-(--ui-input-focus-outline) 
-  outline-2 outline-offset-2 ;
+  @apply appearance-none [border-style:solid] [border-width:var(--switch-border-width)] cursor-pointer w-(--toggle-width) h-(--toggle-height) relative before:absolute before:w-(--u-knob-width) before:h-(--u-knob-height) before:bg-(--knob-bg) before:rounded-(--u-knob-radius) ease-linear transition-all duration-300 before:left-(--knob-left) before:top-(--knob-top) checked:before:left-(--knob-checked-left) before:ease-linear before:transition-all before:duration-300 disabled:opacity-70 disabled:cursor-not-allowed checked:bg-current checked:before:bg-(--u-knob-bg-checked) outline-transparent focus-visible:outline-(--ui-input-focus-outline) outline-2 outline-offset-2;
 }
 
 @utility switch-xs {
@@ -188,4 +212,3 @@
 @utility ui-input-range {
   @apply w-full appearance-none bg-transparent disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none rounded-md cursor-pointer focus-visible:ring-2 focus-visible:ring-(--ring-bg) focus-visible:ring-offset-2 focus-visible:ring-offset-(--ring-offset-color) [&::-webkit-slider-thumb]:relative [&::-webkit-slider-thumb]:z-[1] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:ring-2 [&::-webkit-slider-thumb]:ring-current [&::-webkit-slider-thumb]:size-(--ui-input-range-size) [&::-webkit-slider-thumb]:-mt-(--ui-input-range-mt) [&::-webkit-slider-runnable-track]:group-disabled:opacity-60 [&::-webkit-slider-runnable-track]:bg-(--ui-input-range-track-bg) [&::-webkit-slider-runnable-track]:h-(--ui-input-range-track-height) [&::-webkit-slider-runnable-track]:rounded-lg [&::-webkit-slider-thumb]:bg-(--ui-input-range-thumb-bg) [&::-moz-range-thumb]:relative [&::-moz-range-thumb]:z-[1] [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:ring-2 [&::-moz-range-thumb]:ring-current [&::-moz-range-thumb]:bg-(--ui-input-range-thumb-bg) [&::-moz-range-thumb]:size-(--ui-input-range-size) [&::-moz-range-thumb]:-mt-(--ui-input-range-mt) [&::-moz-range-track]:group-disabled:opacity-50 [&::-moz-range-track]:bg-(--ui-input-range-track-bg) [&::-moz-range-track]:rounded-lg [&::-moz-range-track]:h-(--ui-input-range-track-height);
 }
-

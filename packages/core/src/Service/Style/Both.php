@@ -95,7 +95,7 @@ class Both
     --border-sub: var(--color-gray-900);
     --border-card:var(--color-gray-800);
     --border-input:var(--color-gray-800);
-    --focus-ring: --alpha(var(--c-primary-800)/30%);
+    --focus-ring: --alpha(var(--color-primary-800)/30%);
     --dropdown-item-bg-hover: var(--color-gray-900);
     --dropdown-item-fg: var(--color-gray-200);
     --dropdown-item-fg-hover: var(--color-gray-50);

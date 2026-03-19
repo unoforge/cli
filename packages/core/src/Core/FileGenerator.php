@@ -90,6 +90,8 @@ class FileGenerator
 
     private static function createLaravelFiles($answers): void
     {
+        $isForBoth =strtolower($answers['themingMode']) == 'both' ;
+
         $mainCssFileName = 'app'; // Default filename for Laravel
         if (!is_dir('app/Flexiwind')) {
             mkdir('app/Flexiwind', Constants::DIR_PERMISSIONS, true);
@@ -106,7 +108,7 @@ class FileGenerator
         );
 
         self::createFlexiwindFiles($answers, $mainCssFileName);
-        self::createLaravelBaseLayout();
+        self::createLaravelBaseLayout($isForBoth);
     }
 
 
@@ -119,15 +121,22 @@ class FileGenerator
         self::createSymfonyBaseLayout();
     }
 
-    public static function createLaravelBaseLayout()
+    public static function createLaravelBaseLayout($isForBoth=false)
     {
         if (!is_dir('resources/views/layouts')) {
             mkdir('resources/views/layouts', 0755, true);
         }
-        file_put_contents(
+       if($isForBoth){
+            file_put_contents(
+                'resources/views/layouts/base.blade.php',
+                StubStorage::get('laravel.app_layout_themed')
+            );
+       }else{
+         file_put_contents(
             'resources/views/layouts/base.blade.php',
             StubStorage::get('laravel.app_layout')
         );
+       }
     }
 
     public static function createSymfonyBaseLayout() {}

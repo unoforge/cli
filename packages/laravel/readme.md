@@ -11,6 +11,8 @@ After installation, use:
 - `php artisan flexi:fix-icons`
 - `php artisan flexi:clean-flux`
 
+[Read this for more information](./docs/README.md)
+
 ## Auto-discovery
 
 The package exposes `FlexiLaravel\FlexiServiceProvider` through Composer `extra.laravel.providers`,

@@ -18,6 +18,26 @@
     --btn-solid-color-press: var(--color-secondary-800);
 }
 
+@utility btn-solid-success {
+    --btn-solid-top-shadow: var(--color-success-500);
+    --btn-solid-bottom-shadow: var(--color-success-700);
+    --btn-solid-top-shadow-hover: var(--color-success-600);
+    --btn-solid-bottom-shadow-hover: var(--color-success-800);
+    --btn-solid-color: var(--color-success-600);
+    --btn-solid-color-hover: var(--color-success-700);
+    --btn-solid-color-press: var(--color-success-800);
+}
+
+@utility btn-solid-danger {
+    --btn-solid-top-shadow: var(--color-danger-500);
+    --btn-solid-bottom-shadow: var(--color-danger-700);
+    --btn-solid-top-shadow-hover: var(--color-danger-600);
+    --btn-solid-bottom-shadow-hover: var(--color-danger-800);
+    --btn-solid-color: var(--color-danger-600);
+    --btn-solid-color-hover: var(--color-danger-700);
+    --btn-solid-color-press: var(--color-danger-800);
+}
+
 @utility btn-solid-neutral {
     --btn-solid-top-shadow: var(--color-gray-200);
     --btn-solid-bottom-shadow: var(--color-gray-100);
@@ -28,29 +48,6 @@
     --btn-solid-color-press: var(--color-gray-200);
 }
 
-@utility btn-flexi-white {
-    --btn-flexi-bg: var(--color-gray-900);
-    --btn-flexi-hover-bg: var(--color-gray-800);
-    --btn-flexi-active-bg: var(--color-gray-900);
-    --btn-flexi-shadow-a: var(--color-gray-800);
-    --btn-flexi-shadow-b: var(--color-gray-900);
-    --btn-flexi-shadow-c: var(--color-gray-800);
-    --btn-flexi-shadow-active-a: var(--color-gray-700);
-    --btn-flexi-shadow-active-b: var(--color-gray-800);
-    --btn-flexi-shadow-active-c: var(--color-gray-900);
-}
-
-@utility btn-flexi-neutral {
-    --btn-flexi-bg: var(--color-white);
-    --btn-flexi-hover-bg: var(--color-gray-100);
-    --btn-flexi-active-bg: var(--color-gray-50);
-    --btn-flexi-shadow-a: var(--color-gray-100);
-    --btn-flexi-shadow-b: var(--color-gray-200);
-    --btn-flexi-shadow-c: var(--color-gray-50);
-    --btn-flexi-shadow-active-a: var(--color-gray-200);
-    --btn-flexi-shadow-active-b: var(--color-gray-300);
-    --btn-flexi-shadow-active-c: var(--color-gray-50);
-}
 
 @utility btn-outline-danger {
     --btn-outline-color: --alpha(var(--color-danger-500) / 30%);
@@ -87,6 +84,13 @@
     --btn-ghost-bg-color-press: --alpha(var(--color-danger-600) / 25%);
     --btn-ghost-text-color: var(--color-danger-300);
     --btn-ghost-text-color-hover: var(--color-danger-200);
+}
+
+@utility btn-ghost-primary {
+    --btn-ghost-bg-color-hover: --alpha(var(--color-primary-600) / 30%);
+    --btn-ghost-bg-color-press: --alpha(var(--color-primary-600) / 25%);
+    --btn-ghost-text-color: var(--color-primary-300);
+    --btn-ghost-text-color-hover: var(--color-primary-200);
 }
 
 @utility btn-ghost-gray {

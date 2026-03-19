@@ -1,7 +1,7 @@
 {
     "name": "unoforge/flexi-core",
     "description": "Core logic for Flexi CLI",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "type": "library",
     "require": {
         "symfony/yaml": "^7.3 || ^8.0",

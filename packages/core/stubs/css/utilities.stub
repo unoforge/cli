@@ -110,6 +110,15 @@
     }
 }
 
+@utility ui-soft-gray {
+    --ui-soft-bg: --alpha(var(--color-gray-200) / 40%);
+    --ui-soft-text: var(--color-gray-700);
+
+    &:is(.dark *) {
+        --ui-soft-bg: --alpha(var(--color-gray-700) / 30%);
+        --ui-soft-text: var(--color-gray-300);
+    }
+}
 @utility ui-soft-success {
     --ui-soft-bg: --alpha(var(--color-success-100) / 40%);
     --ui-soft-text: var(--color-success-600);
@@ -140,6 +149,19 @@
     }
 }
 
+
+
+@utility ui-subtle-gray {
+    --ui-subtle-bg: --alpha(var(--color-gray-200) / 40%);
+    --ui-subtle-text: var(--color-gray-700);
+    --ui-subtle-border: var(--color-gray-200);
+
+    &:is(.dark *) {
+        --ui-subtle-bg: --alpha(var(--color-gray-800) / 30%);
+        --ui-subtle-text: var(--color-gray-300);
+        --ui-subtle-border: --alpha(var(--color-gray-800) / 80%);
+    }
+}
 
 @utility ui-subtle-success {
     --ui-subtle-bg: --alpha(var(--color-success-100) / 40%);
