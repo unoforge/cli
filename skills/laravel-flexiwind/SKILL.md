@@ -1,13 +1,13 @@
 ---
 name: laravel-flexiwind
-description: Use this skill when the user wants Laravel-only Flexiwind CLI workflows, including project initialization, component installation, icon migration, and Flux cleanup.
+description: Use this skill when the user wants Laravel-only Flexiwind CLI workflows, including project initialization, component installation, icon migration.
 ---
 
 # Laravel Flexiwind
 
 ## Use This Skill When
 - The user asks for Flexiwind setup in a Laravel app.
-- The user wants to run Laravel-specific Flexiwind commands (`init`, `add`, `fix-icons`, `clean:flux`).
+- The user wants to run Laravel-specific Flexiwind commands (`init`, `add`, `fix-icons`).
 - The user wants a Laravel-only CLI flow rather than Symfony or generic PHP paths.
 
 ## Quick Checks
@@ -24,8 +24,6 @@ description: Use this skill when the user wants Laravel-only Flexiwind CLI workf
    - Use `--namespace` when requested.
 3. Normalize icons after library changes:
    - `flexi-laravel fix-icons`
-4. Remove Flux scaffolding if requested:
-   - `flexi-laravel clean:flux`
 
 ## Expected Outputs
 - `flexiwind.yaml` created and valid.

@@ -1,12 +1,3 @@
-<?php
-
-namespace FlexiCore\Service\Style;
-
-class Dark
-{
-    public static function get()
-    {
-        $root = <<<'CSS'
 :root {
 
     --primary: var(--color-primary-500);
@@ -68,8 +59,4 @@ class Dark
     --dropdown-item-danger-fg: var(--color-danger-500);
     --dropdown-item-danger-outline: var(--danger);
     color-scheme: dark;
-}
-CSS;
-        return $root;
-    }
 }

@@ -29,7 +29,7 @@ class FileGenerator
         }
 
         if (!is_dir($cssFolder.'/flexiwind')) {
-            mkdir($cssFolder.'/flexiwind', Constants::DIR_PERMISSIONS, true);
+            mkdir("{$cssFolder}/flexiwind", Constants::DIR_PERMISSIONS, true);
         }
 
         file_put_contents(
@@ -54,27 +54,6 @@ class FileGenerator
         file_put_contents(
             $cssFolder . "/$mainCssFileName.css",
             $app_style
-        );
-
-        file_put_contents(
-            $cssFolder . '/flexiwind/base.css',
-            StubStorage::get('css.flexiwind.base')
-        );
-        file_put_contents(
-            $cssFolder . '/flexiwind/form.css',
-            StubStorage::get('css.flexiwind.form')
-        );
-        file_put_contents(
-            $cssFolder . '/flexiwind/button.css',
-            StubStorage::get('css.flexiwind.button')
-        );
-        file_put_contents(
-            $cssFolder . '/flexiwind/ui.css',
-            StubStorage::get('css.flexiwind.ui')
-        );
-        file_put_contents(
-            $cssFolder . '/flexiwind/utils.css',
-            StubStorage::get('css.flexiwind.utils')
         );
 
 

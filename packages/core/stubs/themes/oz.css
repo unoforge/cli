@@ -1,0 +1,80 @@
+/* stubs/oz.css */
+@theme inline {
+  /* primary: indigo */
+  --color-primary-50: var(--color-indigo-50);
+  --color-primary-100: var(--color-indigo-100);
+  --color-primary-200: var(--color-indigo-200);
+  --color-primary-300: var(--color-indigo-300);
+  --color-primary-400: var(--color-indigo-400);
+  --color-primary-500: var(--color-indigo-500);
+  --color-primary-600: var(--color-indigo-600);
+  --color-primary-700: var(--color-indigo-700);
+  --color-primary-800: var(--color-indigo-800);
+  --color-primary-900: var(--color-indigo-900);
+  --color-primary-950: var(--color-indigo-950);
+
+  /* secondary: cyan */
+  --color-secondary-50: var(--color-cyan-50);
+  --color-secondary-100: var(--color-cyan-100);
+  --color-secondary-200: var(--color-cyan-200);
+  --color-secondary-300: var(--color-cyan-300);
+  --color-secondary-400: var(--color-cyan-400);
+  --color-secondary-500: var(--color-cyan-500);
+  --color-secondary-600: var(--color-cyan-600);
+  --color-secondary-700: var(--color-cyan-700);
+  --color-secondary-800: var(--color-cyan-800);
+  --color-secondary-900: var(--color-cyan-900);
+  --color-secondary-950: var(--color-cyan-950);
+
+  /* accent: fuchsia */
+  --color-accent-50: var(--color-fuchsia-50);
+  --color-accent-100: var(--color-fuchsia-100);
+  --color-accent-200: var(--color-fuchsia-200);
+  --color-accent-300: var(--color-fuchsia-300);
+  --color-accent-400: var(--color-fuchsia-400);
+  --color-accent-500: var(--color-fuchsia-500);
+  --color-accent-600: var(--color-fuchsia-600);
+  --color-accent-700: var(--color-fuchsia-700);
+  --color-accent-800: var(--color-fuchsia-800);
+  --color-accent-900: var(--color-fuchsia-900);
+  --color-accent-950: var(--color-fuchsia-950);
+
+  /* success: lime */
+  --color-success-50: var(--color-lime-50);
+  --color-success-100: var(--color-lime-100);
+  --color-success-200: var(--color-lime-200);
+  --color-success-300: var(--color-lime-300);
+  --color-success-400: var(--color-lime-400);
+  --color-success-500: var(--color-lime-500);
+  --color-success-600: var(--color-lime-600);
+  --color-success-700: var(--color-lime-700);
+  --color-success-800: var(--color-lime-800);
+  --color-success-900: var(--color-lime-900);
+  --color-success-950: var(--color-lime-950);
+
+  /* danger: rose */
+  --color-danger-50: var(--color-rose-50);
+  --color-danger-100: var(--color-rose-100);
+  --color-danger-200: var(--color-rose-200);
+  --color-danger-300: var(--color-rose-300);
+  --color-danger-400: var(--color-rose-400);
+  --color-danger-500: var(--color-rose-500);
+  --color-danger-600: var(--color-rose-600);
+  --color-danger-700: var(--color-rose-700);
+  --color-danger-800: var(--color-rose-800);
+  --color-danger-900: var(--color-rose-900);
+  --color-danger-950: var(--color-rose-950);
+
+
+  --color-gray-50: oklch(98.62% 0.0053 286.30);
+  --color-gray-100: oklch(97.13% 0.0053 286.30);
+  --color-gray-200: oklch(93.06% 0.0121 286.16);
+  --color-gray-300: oklch(87.94% 0.0150 286.09);
+  --color-gray-400: oklch(73.67% 0.0229 285.83);
+  --color-gray-500: oklch(54.50% 0.0294 285.38);
+  --color-gray-600: oklch(42.72% 0.0296 285.08);
+  --color-gray-700: oklch(35.55% 0.0293 284.81);
+  --color-gray-800: oklch(24.82% 0.0340 283.65);
+  --color-gray-900: oklch(18.98% 0.0282 283.38);
+  --color-gray-950: oklch(9.75% 0.0338 278.10);
+}

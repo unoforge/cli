@@ -17,6 +17,5 @@ composer require --dev unoforge/flexiwind-cli
 - [add](./commands/add.md)
 - [build](./commands/build.md)
 - [validate](./commands/validate.md)
-- [clean:flux](./commands/clean-flux.md)
 
 

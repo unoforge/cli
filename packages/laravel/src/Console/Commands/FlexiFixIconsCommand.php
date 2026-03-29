@@ -74,14 +74,8 @@ class FlexiFixIconsCommand extends Command
         info("Replacing Phosphor icons with {$iconLibrary} icons...");
 
         // Determine mapping key based on icon library
-        $mappingKey = null;
-        if ($iconLibraryLower === 'heroicons') {
-            $mappingKey = 'heroicons';
-        } elseif ($iconLibraryLower === 'lucide') {
-            $mappingKey = 'lucide';
-        } elseif ($iconLibraryLower === 'hugeicons') {
-            $mappingKey = 'hugeicons';
-        }
+        $supportedLibraries = ['heroicons', 'lucide', 'hugeicons', 'solar'];
+        $mappingKey = \in_array($iconLibraryLower, $supportedLibraries) ? $iconLibraryLower : null;
 
         if (!$mappingKey) {
             error("Could not determine mapping key for library: {$iconLibrary}");

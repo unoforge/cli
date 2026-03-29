@@ -1,0 +1,93 @@
+/* stubs/winter.css */
+@theme inline {
+  /* primary: cyan */
+  --color-primary-50: var(--color-cyan-50);
+  --color-primary-100: var(--color-cyan-100);
+  --color-primary-200: var(--color-cyan-200);
+  --color-primary-300: var(--color-cyan-300);
+  --color-primary-400: var(--color-cyan-400);
+  --color-primary-500: var(--color-cyan-500);
+  --color-primary-600: var(--color-cyan-600);
+  --color-primary-700: var(--color-cyan-700);
+  --color-primary-800: var(--color-cyan-800);
+  --color-primary-900: var(--color-cyan-900);
+  --color-primary-950: var(--color-cyan-950);
+
+  /* secondary: sky */
+  --color-secondary-50: var(--color-sky-50);
+  --color-secondary-100: var(--color-sky-100);
+  --color-secondary-200: var(--color-sky-200);
+  --color-secondary-300: var(--color-sky-300);
+  --color-secondary-400: var(--color-sky-400);
+  --color-secondary-500: var(--color-sky-500);
+  --color-secondary-600: var(--color-sky-600);
+  --color-secondary-700: var(--color-sky-700);
+  --color-secondary-800: var(--color-sky-800);
+  --color-secondary-900: var(--color-sky-900);
+  --color-secondary-950: var(--color-sky-950);
+
+  /* accent: emerald */
+  --color-accent-50: var(--color-emerald-50);
+  --color-accent-100: var(--color-emerald-100);
+  --color-accent-200: var(--color-emerald-200);
+  --color-accent-300: var(--color-emerald-300);
+  --color-accent-400: var(--color-emerald-400);
+  --color-accent-500: var(--color-emerald-500);
+  --color-accent-600: var(--color-emerald-600);
+  --color-accent-700: var(--color-emerald-700);
+  --color-accent-800: var(--color-emerald-800);
+  --color-accent-900: var(--color-emerald-900);
+  --color-accent-950: var(--color-emerald-950);
+
+  /* danger: rose */
+  --color-danger-50: var(--color-rose-50);
+  --color-danger-100: var(--color-rose-100);
+  --color-danger-200: var(--color-rose-200);
+  --color-danger-300: var(--color-rose-300);
+  --color-danger-400: var(--color-rose-400);
+  --color-danger-500: var(--color-rose-500);
+  --color-danger-600: var(--color-rose-600);
+  --color-danger-700: var(--color-rose-700);
+  --color-danger-800: var(--color-rose-800);
+  --color-danger-900: var(--color-rose-900);
+  --color-danger-950: var(--color-rose-950);
+
+  /* warning: amber */
+  --color-warning-50: var(--color-amber-50);
+  --color-warning-100: var(--color-amber-100);
+  --color-warning-200: var(--color-amber-200);
+  --color-warning-300: var(--color-amber-300);
+  --color-warning-400: var(--color-amber-400);
+  --color-warning-500: var(--color-amber-500);
+  --color-warning-600: var(--color-amber-600);
+  --color-warning-700: var(--color-amber-700);
+  --color-warning-800: var(--color-amber-800);
+  --color-warning-900: var(--color-amber-900);
+  --color-warning-950: var(--color-amber-950);
+
+  /* info: cyan */
+  --color-info-50: var(--color-cyan-50);
+  --color-info-100: var(--color-cyan-100);
+  --color-info-200: var(--color-cyan-200);
+  --color-info-300: var(--color-cyan-300);
+  --color-info-400: var(--color-cyan-400);
+  --color-info-500: var(--color-cyan-500);
+  --color-info-600: var(--color-cyan-600);
+  --color-info-700: var(--color-cyan-700);
+  --color-info-800: var(--color-cyan-800);
+  --color-info-900: var(--color-cyan-900);
+  --color-info-950: var(--color-cyan-950);
+
+  
+  --color-gray-50: oklch(98.22% 0.0041 271.37);
+  --color-gray-100: oklch(95.84% 0.0250 229.11);
+  --color-gray-200: oklch(93.62% 0.0166 250.85);
+  --color-gray-300: oklch(88.32% 0.0320 255.59);
+  --color-gray-400: oklch(71.07% 0.0351 256.79);
+  --color-gray-500: oklch(58.13% 0.0466 245.42);
+  --color-gray-600: oklch(44.55% 0.0374 257.28);
+  --color-gray-700: oklch(40.19% 0.0450 244.38);
+  --color-gray-800: oklch(27.27% 0.0432 246.11);
+  --color-gray-900: oklch(20.09% 0.0455 251.13);
+  --color-gray-950: oklch(11.28% 0.0430 258.66);
+}

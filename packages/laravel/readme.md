@@ -9,7 +9,6 @@ After installation, use:
 - `php artisan flexi:init`
 - `php artisan flexi:add ...`
 - `php artisan flexi:fix-icons`
-- `php artisan flexi:clean-flux`
 
 [Read this for more information](./docs/README.md)
 

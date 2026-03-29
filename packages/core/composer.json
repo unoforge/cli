@@ -1,9 +1,10 @@
 {
     "name": "unoforge/flexi-core",
     "description": "Core logic for Flexi CLI",
-    "version": "1.0.5",
+    "version": "1.0.7",
     "type": "library",
     "require": {
+        "php": "^8.3",
         "symfony/yaml": "^7.3 || ^8.0",
         "symfony/http-client": "^7.3 || ^8.0",
         "laravel/prompts": "^0.3.10",

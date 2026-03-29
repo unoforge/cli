@@ -1,5 +1,5 @@
 @theme {
-  --color-primary: hsl(36, 100%, 94%);
+  --color-primary-50: hsl(36, 100%, 94%);
   --color-primary-100: hsl(36, 100%, 83%);
   --color-primary-200: hsl(32, 100%, 71%);
   --color-primary-300: hsl(25, 100%, 63%);

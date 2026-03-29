@@ -46,20 +46,21 @@ class Constants
     /**
      * Supported icon libraries
      */
-    public const ICON_LIBRARIES = ['phosphore', 'heroicons', 'lucide','hugeicons'];
+    public const ICON_LIBRARIES = ['phosphore', 'heroicons', 'lucide','hugeicons','solar'];
 
     public const UI_ICONS = [
         'phosphore'=>'ph',
         'heroicons'=>'heroicons',
         'lucide'=>'lucide',
         'hugeicons'=>'hugeicons',
+        'solar'=>'solar'
     ];
 
 
     /**
      * Supported themes
      */
-    public const THEMES = ['flexiwind', 'water', 'earth', 'fire', 'air'];
+    public const THEMES = ['flexiwind', 'water', 'earth', 'fire', 'air', 'energy', 'mystery', 'nature', 'romance', 'spring', 'trust', 'winter'];
 
     /**
      * Supported theming modes

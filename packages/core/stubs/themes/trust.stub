@@ -1,0 +1,54 @@
+/* stubs/trust.css */
+@theme inline {
+  /* primary: blue */
+  --color-primary-50: var(--color-blue-50);
+  --color-primary-100: var(--color-blue-100);
+  --color-primary-200: var(--color-blue-200);
+  --color-primary-300: var(--color-blue-300);
+  --color-primary-400: var(--color-blue-400);
+  --color-primary-500: var(--color-blue-500);
+  --color-primary-600: var(--color-blue-600);
+  --color-primary-700: var(--color-blue-700);
+  --color-primary-800: var(--color-blue-800);
+  --color-primary-900: var(--color-blue-900);
+  --color-primary-950: var(--color-blue-950);
+
+  /* secondary: purple */
+  --color-secondary-50: var(--color-purple-50);
+  --color-secondary-100: var(--color-purple-100);
+  --color-secondary-200: var(--color-purple-200);
+  --color-secondary-300: var(--color-purple-300);
+  --color-secondary-400: var(--color-purple-400);
+  --color-secondary-500: var(--color-purple-500);
+  --color-secondary-600: var(--color-purple-600);
+  --color-secondary-700: var(--color-purple-700);
+  --color-secondary-800: var(--color-purple-800);
+  --color-secondary-900: var(--color-purple-900);
+  --color-secondary-950: var(--color-purple-950);
+
+  /* accent: lime */
+  --color-accent-50: var(--color-lime-50);
+  --color-accent-100: var(--color-lime-100);
+  --color-accent-200: var(--color-lime-200);
+  --color-accent-300: var(--color-lime-300);
+  --color-accent-400: var(--color-lime-400);
+  --color-accent-500: var(--color-lime-500);
+  --color-accent-600: var(--color-lime-600);
+  --color-accent-700: var(--color-lime-700);
+  --color-accent-800: var(--color-lime-800);
+  --color-accent-900: var(--color-lime-900);
+  --color-accent-950: var(--color-lime-950);
+
+  /* gray: slate */
+  --color-gray-50: var(--color-slate-50);
+  --color-gray-100: var(--color-slate-100);
+  --color-gray-200: var(--color-slate-200);
+  --color-gray-300: var(--color-slate-300);
+  --color-gray-400: var(--color-slate-400);
+  --color-gray-500: var(--color-slate-500);
+  --color-gray-600: var(--color-slate-600);
+  --color-gray-700: var(--color-slate-700);
+  --color-gray-800: var(--color-slate-800);
+  --color-gray-900: var(--color-slate-900);
+  --color-gray-950: var(--color-slate-950);
+}

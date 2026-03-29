@@ -13,7 +13,3 @@
 
 ## Icons
 - `flexi-laravel fix-icons`
-
-## Flux Cleanup
-- `flexi-laravel clean:flux`
-- `flexi-laravel clean:flux --force`
