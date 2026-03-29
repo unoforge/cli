@@ -21,15 +21,15 @@ class RegistryStore
 
     public function add(string $name, string $namespace, string $version, mixed $message = null): void
     {
-        $messages = $this->normalizeMessages($message);
+        $guides = $this->normalizeMessages($message);
 
         foreach ($this->data['installed'] as &$item) {
             if ($item['name'] === $name && $item['namespace'] === $namespace) {
                 $item['version'] = $version;
-                if (!empty($messages)) {
-                    $item['messages'] = $messages;
+                if (!empty($guides)) {
+                    $item['guides'] = $guides;
                 } else {
-                    unset($item['messages']);
+                    unset($item['guides']);
                 }
                 $this->persist();
                 return;
@@ -40,8 +40,8 @@ class RegistryStore
             'namespace' => $namespace,
             'version' => $version,
         ];
-        if (!empty($messages)) {
-            $newItem['messages'] = $messages;
+        if (!empty($guides)) {
+            $newItem['guides'] = $guides;
         }
         $this->data['installed'][] = $newItem;
         $this->persist();

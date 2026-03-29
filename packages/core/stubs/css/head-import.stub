@@ -1,8 +1,8 @@
 @import "tailwindcss";
-@reference "./flexiwind/base.css"
+@reference "./flexiwind/base.css";
 @reference "./flexiwind/form.css";
 @reference "./flexiwind/button.css";
 @reference "./flexiwind/ui.css";
-@reference "./flexiwind/utils.css";;
+@reference "./flexiwind/utils.css";
 @reference "./button-styles.css";
 @reference "./ui-utilities.css";

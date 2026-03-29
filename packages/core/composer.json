@@ -1,7 +1,7 @@
 {
     "name": "unoforge/flexi-core",
     "description": "Core logic for Flexi CLI",
-    "version": "1.0.7",
+    "version": "1.0.9",
     "type": "library",
     "require": {
         "php": "^8.3",
